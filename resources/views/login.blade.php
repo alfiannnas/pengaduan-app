@@ -55,13 +55,16 @@
             justify-content: space-between;
         }
         .btn-secondary, .btn-primary {
-            width: 48%;
+            width: 41%;
             padding: 12px;
             border: none;
             border-radius: 10px;
             font-size: 16px;
             cursor: pointer;
             color: white;
+            text-align: center;
+            display: inline-block;
+            text-decoration: none;
         }
         .btn-secondary {
             background: #cc3333;
@@ -103,8 +106,8 @@
             </div>
             <button type="submit" class="btn-login">LOGIN</button>
             <div class="btn-group">
-                <button type="button" class="btn-secondary">Kembali</button>
-                <button type="button" class="btn-primary">Registrasi</button>
+                <a href="{{ url()->previous() }}" class="btn-secondary">Kembali</a>
+                <a href="{{ route('registration') }}" class="btn-primary">Registrasi</a>
             </div>
         </form>
     </div>
