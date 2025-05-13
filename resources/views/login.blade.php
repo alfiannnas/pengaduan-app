@@ -12,7 +12,7 @@
 
         <style>
         body {
-            background: url('image/bg.png') no-repeat center center fixed;
+            background: url('images/bg.png') no-repeat center center fixed;
             background-size: cover;
             font-family: Arial, sans-serif;
         }
