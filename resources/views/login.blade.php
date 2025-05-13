@@ -71,7 +71,7 @@
         }
         .error {
             color: #ffcccb;
-            margin-top: 10px;
+            margin: 10px;
         }
     </style>
         <!-- Styles / Scripts -->
@@ -86,7 +86,13 @@
     <body>
     <div class="login-container">
         <h1>LOGIN</h1>
-        <form method="POST" action="">
+        @if(session('error'))
+            <div class="error">
+                {{ session('error') }}
+            </div>
+        @endif
+        <form method="POST" action="{{ route('login') }}">
+            @csrf
             <div>
                 <label style="float: left; margin-left: 20px;">Username</label><br>
                 <input type="text" name="username" placeholder="Masukkan Username" required>
@@ -95,7 +101,7 @@
                 <label style="float: left; margin-left: 20px;">Password</label><br>
                 <input type="password" name="password" placeholder="Masukkan Password" required>
             </div>
-            <button type="submit" name="login" class="btn-login">LOGIN</button>
+            <button type="submit" class="btn-login">LOGIN</button>
             <div class="btn-group">
                 <button type="button" class="btn-secondary">Kembali</button>
                 <button type="button" class="btn-primary">Registrasi</button>
