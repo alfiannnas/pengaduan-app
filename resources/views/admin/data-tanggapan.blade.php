@@ -224,7 +224,10 @@
         <h1>Tanggapan</h1>
 
         <div class="card-table">
-            <a href="?export=1" class="btn-export">Export</a>
+            <form method="post" action="{{ route('admin.export-tanggapan') }}" style="margin-bottom:10px;">
+                @csrf
+                <button type="submit" name="export" value="1" class="btn-export">Export</button>
+            </form>
             <h2>Data Tanggapan</h2>
             <table>
                 <thead>

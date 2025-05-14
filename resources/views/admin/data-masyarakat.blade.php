@@ -249,7 +249,7 @@
             <h2>Admin</h2>
         </div>
         <hr>
-        <a href="dashb  oard.php"><span>🏠</span> Dashboard</a>
+        <a href="{{ route('admin.dashboard') }}"><span>🏠</span> Dashboard</a>
         <a href="{{ route('admin.data-tanggapan') }}" class="active"><span>✅</span> Data Tanggapan</a>
         <a href="{{ route('admin.data-pengaduan') }}"><span>📄</span> Data Pengaduan</a>
         <a href="{{ route('admin.data-petugas') }}"><span>👮</span> Data Petugas</a>

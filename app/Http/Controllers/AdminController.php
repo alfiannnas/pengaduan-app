@@ -6,7 +6,9 @@ use Illuminate\Http\Request;
 use App\Models\Pengaduan;
 use App\Models\Tanggapan;
 use App\Models\User;
+use Carbon\Carbon;
 use Illuminate\Support\Facades\Hash;
+use Maatwebsite\Excel\Facades\Excel;
 
 class AdminController extends Controller
 {
@@ -32,6 +34,63 @@ class AdminController extends Controller
         return redirect()->back()->with('success', 'Tanggapan berhasil dihapus');
     }
 
+    public function exportTanggapan(Request $request)
+    {
+        $tanggapan = Tanggapan::with('pengaduan')->get();
+        
+        return Excel::download(
+            new class($tanggapan) implements \Maatwebsite\Excel\Concerns\FromCollection, 
+                \Maatwebsite\Excel\Concerns\WithHeadings,
+                \Maatwebsite\Excel\Concerns\WithMapping {
+                
+                protected $tanggapan;
+                
+                public function __construct($tanggapan)
+                {
+                    $this->tanggapan = $tanggapan;
+                }
+                
+                public function collection()
+                {
+                    return $this->tanggapan;
+                }
+                
+                public function headings(): array
+                {
+                    return [
+                        
+                        'No',
+                        'Tanggal',
+                        'Nama',
+                        'NIK',
+                        'Alamat',
+                        'No HP',
+                        'Judul',
+                        'Tanggapan',
+                        'Status',
+                    ];
+                }
+                private $counter = 1;
+                
+                public function map($row): array
+                {
+                    return [
+                        $this->counter++,
+                        Carbon::parse($row->pengaduan->tanggal)->format('Y-m-d'),
+                        $row->pengaduan->nama ?? 'N/A',
+                        $row->pengaduan->nik ?? 'N/A',
+                        $row->pengaduan->alamat ?? 'N/A',
+                        $row->pengaduan->no_hp ?? 'N/A',
+                        $row->pengaduan->judul ?? 'N/A',
+                        $row->tanggapan ?? 'N/A',
+                        $row->pengaduan->status ?? 'N/A',
+                    ];
+                }
+            },
+            'tanggapan.xlsx'
+        );
+    }
+
     public function dataPengaduan()
     {
         $pengaduan = Pengaduan::paginate(10);
@@ -47,6 +106,64 @@ class AdminController extends Controller
         }
         $pengaduan->delete();
         return redirect()->back()->with('success', 'Pengaduan berhasil dihapus');
+    }
+
+    public function exportPengaduan(Request $request)
+    {
+        $pengaduan = Pengaduan::with('tanggapanDetail')->get();
+        
+        return Excel::download(
+            new class($pengaduan) implements \Maatwebsite\Excel\Concerns\FromCollection, 
+                \Maatwebsite\Excel\Concerns\WithHeadings,
+                \Maatwebsite\Excel\Concerns\WithMapping {
+                
+                protected $pengaduan;
+                
+                public function __construct($pengaduan)
+                {
+                    $this->pengaduan = $pengaduan;
+                }
+                
+                public function collection()
+                {
+                    return $this->pengaduan;
+                }
+                
+                public function headings(): array
+                {
+                    return [
+                        'No',
+                        'Tanggal',
+                        'Nama',
+                        'NIK',
+                        'Alamat',
+                        'No HP',
+                        'Judul', 
+                        'Laporan',
+                        'Status',
+                        'Tanggapan',
+                    ];
+                }
+                
+                public function map($row): array
+                {
+                    static $i = 1;
+                    return [
+                        $i++,
+                        Carbon::parse($row->tanggal)->format('Y-m-d'),
+                        $row->nama ?? 'N/A',
+                        $row->nik ?? 'N/A',
+                        $row->alamat ?? 'N/A',
+                        $row->no_hp ?? 'N/A',
+                        $row->judul ?? 'N/A', 
+                        $row->laporan ?? 'N/A',
+                        $row->status,
+                        $row->tanggapanDetail->tanggapan ?? 'N/A',
+                    ];
+                }
+            },
+            'pengaduan.xlsx'
+        );
     }
 
     public function dataPetugas()

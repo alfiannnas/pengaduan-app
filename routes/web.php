@@ -31,6 +31,9 @@ Route::prefix('admin')->middleware('auth')->group(function () {
     Route::post('/data-masyarakat', [AdminController::class, 'storeMasyarakat'])->name('admin.store-masyarakat');
     Route::delete('/data-masyarakat/{id}', [AdminController::class, 'deleteMasyarakat'])->name('admin.delete-masyarakat');
     Route::get('/data-masyarakat', [AdminController::class, 'dataMasyarakat'])->name('admin.data-masyarakat');
+
+    Route::post('/export-pengaduan', [AdminController::class, 'exportPengaduan'])->name('admin.export-pengaduan');
+    Route::post('/export-tanggapan', [AdminController::class, 'exportTanggapan'])->name('admin.export-tanggapan');
     
     Route::get('/profil-desa', [AdminController::class, 'profilDesa'])->name('admin.profil-desa');
 });

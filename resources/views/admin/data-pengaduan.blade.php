@@ -250,7 +250,8 @@
         <h1>Pengaduan</h1>
 
         <div class="card-table">
-            <form method="get" style="margin-bottom:10px;">
+            <form method="post" action="{{ route('admin.export-pengaduan') }}" style="margin-bottom:10px;">
+                @csrf
                 <button type="submit" name="export" value="1" class="btn-export">Export</button>
             </form>
 

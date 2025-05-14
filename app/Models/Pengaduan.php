@@ -21,4 +21,9 @@ class Pengaduan extends Model
         'foto',
         'status'
     ];
+
+    public function tanggapanDetail()
+    {
+        return $this->hasOne(Tanggapan::class);
+    }
 }
