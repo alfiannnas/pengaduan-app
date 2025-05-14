@@ -15,4 +15,5 @@ Route::post('/registration', [AuthController::class, 'register']);
 // Admin
 Route::prefix('admin')->middleware('auth')->group(function () {
     Route::get('/dashboard', [AdminController::class, 'dashboard'])->name('admin.dashboard');
+    Route::get('/data-pengaduan', [AdminController::class, 'dataPengaduan'])->name('admin.data-pengaduan');
 });
