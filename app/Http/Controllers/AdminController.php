@@ -12,7 +12,11 @@ class AdminController extends Controller
 {
     public function dashboard()
     {
-        return view('admin.dashboard');
+        $pengaduan = Pengaduan::count();
+        $tanggapan = Tanggapan::count();
+        $masyarakat = User::where('level', 'Masyarakat')->count();
+        $petugas = User::where('level', 'Petugas')->count();
+        return view('admin.dashboard', compact('pengaduan', 'tanggapan', 'masyarakat', 'petugas'));
     }
 
     public function dataTanggapan()

@@ -131,13 +131,13 @@
             <h2>Admin</h2>
         </div>
         <hr>
-        <a href="dashboard.php"><span>🏠</span> Dashboard</a>
-        <a href="data_tanggapan.php"><span>✅</span> Data Tanggapan</a>
-        <a href="data_pengaduan.php"><span>📄</span> Data Pengaduan</a>
-        <a href="data_petugas.php"><span>👮</span> Data Petugas</a>
-        <a href="data_masyarakat"><img src="https://cdn-icons-png.flaticon.com/512/1077/1077114.png" alt="Masyarakat" style="width:20px;"> Data Masyarakat</a>
-        <a href="Profile_desa.php"><span>🏡</span> Profil Desa</a>
-        <a href="login.php" class="logout"><span>🚪</span> Keluar</a>
+        <a href="{{ route('admin.dashboard') }}"><span>🏠</span> Dashboard</a>
+        <a href="{{ route('admin.data-tanggapan') }}"><span>✅</span> Data Tanggapan</a>
+        <a href="{{ route('admin.data-pengaduan') }}"><span>📄</span> Data Pengaduan</a>
+        <a href="{{ route('admin.data-petugas') }}"><span>👮</span> Data Petugas</a>
+        <a href="{{ route('admin.data-masyarakat') }}"><img src="https://cdn-icons-png.flaticon.com/512/1077/1077114.png" alt="Masyarakat" style="width:20px;"> Data Masyarakat</a>
+        <a href="{{ route('admin.profil-desa') }}"><span>🏡</span> Profil Desa</a>
+        <a href="{{ route('login') }}" class="logout"><span>🚪</span> Keluar</a>
     </div>
 
     <div class="content">
@@ -148,28 +148,28 @@
             <div class="card">
                 <div class="info">
                     <div>Jumlah Tanggapan</div>
-                    <div class="number">2</div>
+                    <div class="number">{{ $tanggapan }}</div>
                 </div>
                 <div class="icon">✅</div>
             </div>
             <div class="card">
                 <div class="info">
                     <div>Jumlah Pengaduan</div>
-                    <div class="number">2</div>
+                    <div class="number">{{ $pengaduan }}</div>
                 </div>
                 <div class="icon">📄</div>
             </div>
             <div class="card">
                 <div class="info">
                     <div>Jumlah Petugas</div>
-                    <div class="number">2</div>
+                    <div class="number">{{ $petugas }}</div>
                 </div>
                 <div class="icon">👮</div>
             </div>
             <div class="card">
                 <div class="info">
                     <div>Jumlah Masyarakat</div>
-                    <div class="number">2</div>
+                    <div class="number">{{ $masyarakat }}</div>
                 </div>
                 <div class="icon">
                     <img src="https://cdn-icons-png.flaticon.com/512/1077/1077114.png" alt="Masyarakat" style="width:30px;">
