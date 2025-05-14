@@ -134,4 +134,9 @@ class AdminController extends Controller
         $masyarakat->delete();
         return redirect()->back()->with('success', 'Masyarakat berhasil dihapus');
     }
+
+    public function profilDesa()
+    {
+        return view('admin.profil-desa');
+    }
 }
