@@ -21,10 +21,28 @@ class AdminController extends Controller
         return view('admin.data-tanggapan', compact('tanggapan'));
     }
 
+    public function deleteTanggapan($id)
+    {
+        $tanggapan = Tanggapan::find($id);
+        $tanggapan->delete();
+        return redirect()->back()->with('success', 'Tanggapan berhasil dihapus');
+    }
+
     public function dataPengaduan()
     {
         $pengaduan = Pengaduan::paginate(10);
         return view('admin.data-pengaduan', compact('pengaduan'));
+    }
+
+    public function deletePengaduan($id)
+    {
+        $pengaduan = Pengaduan::find($id);
+        $tanggapan = Tanggapan::where('pengaduan_id', $id)->get();
+        foreach ($tanggapan as $t) {
+            $t->delete();
+        }
+        $pengaduan->delete();
+        return redirect()->back()->with('success', 'Pengaduan berhasil dihapus');
     }
 
     public function dataPetugas()

@@ -15,6 +15,8 @@ Route::post('/registration', [AuthController::class, 'register']);
 // Admin
 Route::prefix('admin')->middleware('auth')->group(function () {
     Route::get('/dashboard', [AdminController::class, 'dashboard'])->name('admin.dashboard');
+    Route::delete('/data-pengaduan/{id}', [AdminController::class, 'deletePengaduan'])->name('admin.delete-pengaduan');
+    Route::delete('/data-tanggapan/{id}', [AdminController::class, 'deleteTanggapan'])->name('admin.delete-tanggapan');
     Route::get('/data-pengaduan', [AdminController::class, 'dataPengaduan'])->name('admin.data-pengaduan');
     Route::get('/data-tanggapan', [AdminController::class, 'dataTanggapan'])->name('admin.data-tanggapan');
 

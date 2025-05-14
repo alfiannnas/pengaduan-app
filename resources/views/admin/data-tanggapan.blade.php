@@ -253,7 +253,13 @@
                         <td>{{ $t->pengaduan->judul }}</td>
                         <td>{{ $t->tanggapan }}</td>
                         <td><span class="badge {{ $t->pengaduan->status === 'Diproses' ? 'badge-warning' : 'badge-success'}}">{{ $t->pengaduan->status }}</span></td>
-                        <td><button class="btn-hapus" onclick="return confirm('Apakah Anda yakin ingin menghapus tanggapan ini?')">HAPUS</button></td>
+                        <td>
+                            <form action="{{ route('admin.delete-tanggapan', $t['id']) }}" method="POST" style="display:inline;">
+                                @csrf
+                                @method('DELETE')
+                                <button type="submit" class="btn btn-hapus" onclick="return confirm('Apakah Anda yakin ingin menghapus data ini?')">Hapus</button>
+                            </form>
+                        </td>
                     </tr>
                     @endforeach
                 </tbody>

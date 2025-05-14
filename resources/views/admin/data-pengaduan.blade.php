@@ -297,9 +297,10 @@
                                 <button type="submit" name="verifikasi" class="btn btn-verifikasi">Verifikasi</button>
                             </form>
                             <button class="btn btn-tanggapi" onclick="openModal(<?= htmlspecialchars(json_encode($data)) ?>)">Tanggapi</button>
-                            <form method="post" style="display:inline;">
-                                <input type="hidden" name="id" value="{{ $data['id'] }}">
-                                <button type="submit" name="hapus" class="btn btn-hapus">Hapus</button>
+                            <form action="{{ route('admin.delete-pengaduan', $data['id']) }}" method="POST" style="display:inline;">
+                                @csrf
+                                @method('DELETE')
+                                <button type="submit" class="btn btn-hapus" onclick="return confirm('Apakah Anda yakin ingin menghapus data ini?')">Hapus</button>
                             </form>
                         </td>
                     </tr>
