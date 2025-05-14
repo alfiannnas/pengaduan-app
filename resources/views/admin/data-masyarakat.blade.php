@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>Data Petugas</title>
+    <title>Data Masyarakat</title>
     <style>
         body {
             margin: 0;
@@ -184,8 +184,8 @@
     </div>
 
     <div class="content">
-        <div class="breadcrumb">Pages / Petugas</div>
-        <h1>Petugas</h1>
+        <div class="breadcrumb">Pages / Masyarakat</div>
+        <h1>Masyarakat</h1>
 
         <div class="card-table">
             <a href="tambah_data.php" class="btn btn-tambah">Tambah Data</a>
@@ -203,9 +203,9 @@
                 </thead>
                 <tbody>
                     @php
-                    $i = ($petugas->currentPage() - 1) * $petugas->perPage() + 1;
+                    $i = ($masyarakat->currentPage() - 1) * $masyarakat->perPage() + 1;
                     @endphp
-                    @foreach($petugas as $data)
+                    @foreach($masyarakat as $data)
                     <tr>
                         <td>{{ $i++ }}</td>
                         <td>{{ $data['name'] }}</td>
@@ -224,7 +224,7 @@
             </table>
 
             <div>
-                {{ $petugas->links() }}
+                {{ $masyarakat->links() }}
             </div>
         </div>
 

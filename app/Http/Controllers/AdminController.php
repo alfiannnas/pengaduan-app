@@ -33,4 +33,11 @@ class AdminController extends Controller
             ->paginate(10);
         return view('admin.data-petugas', compact('petugas'));
     }
+
+    public function dataMasyarakat()
+    {
+        $masyarakat = User::where('level', 'Masyarakat')
+            ->paginate(10);
+        return view('admin.data-masyarakat', compact('masyarakat'));
+    }
 }

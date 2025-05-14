@@ -214,7 +214,7 @@
         <a href="{{ route('admin.data-tanggapan') }}" class="active"><span>✅</span> Data Tanggapan</a>
         <a href="{{ route('admin.data-pengaduan') }}"><span>📄</span> Data Pengaduan</a>
         <a href="{{ route('admin.data-petugas') }}"><span>👮</span> Data Petugas</a>
-        <a href="data_masyarakat.php"><span>👥</span> Data Masyarakat</a>
+        <a href="{{ route('admin.data-masyarakat') }}"><span>👥</span> Data Masyarakat</a>
         <a href="profile_desa.php"><span>🏡</span> Profil Desa</a>
         <a href="#" class="logout"><span>🚪</span> Keluar</a>
     </div>
