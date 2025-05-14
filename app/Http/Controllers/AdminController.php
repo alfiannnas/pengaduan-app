@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Pengaduan;
 use App\Models\Tanggapan;
+use App\Models\User;
 
 class AdminController extends Controller
 {
@@ -23,5 +24,13 @@ class AdminController extends Controller
     {
         $pengaduan = Pengaduan::paginate(10);
         return view('admin.data-pengaduan', compact('pengaduan'));
+    }
+
+    public function dataPetugas()
+    {
+        $petugas = User::where('level', 'Petugas')
+            ->orWhere('level', 'Admin')
+            ->paginate(10);
+        return view('admin.data-petugas', compact('petugas'));
     }
 }

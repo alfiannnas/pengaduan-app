@@ -187,9 +187,10 @@
             padding: 6px;
             margin-top: 4px;
         }
-
-        /* Pagination styling */
     </style>
+    @if (file_exists(public_path('build/manifest.json')) || file_exists(public_path('hot')))
+        @vite(['resources/css/app.css', 'resources/js/app.js'])
+    @endif
 </head>
 
 <body>
@@ -203,7 +204,7 @@
         <a href="dashboard.php"><span>🏠</span> Dashboard</a>
         <a href="{{ route('admin.data-tanggapan') }}" class="active"><span>✅</span> Data Tanggapan</a>
         <a href="{{ route('admin.data-pengaduan') }}"><span>📄</span> Data Pengaduan</a>
-        <a href="data_petugas.php"><span>👮</span> Data Petugas</a>
+        <a href="{{ route('admin.data-petugas') }}"><span>👮</span> Data Petugas</a>
         <a href="data_masyarakat.php"><span>👥</span> Data Masyarakat</a>
         <a href="profile_desa.php"><span>🏡</span> Profil Desa</a>
         <a href="#" class="logout"><span>🚪</span> Keluar</a>
