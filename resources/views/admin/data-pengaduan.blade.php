@@ -187,9 +187,44 @@
             padding: 6px;
             margin-top: 4px;
         }
+
+        .pagination {
+            display: flex;
+            justify-content: start;
+            margin-top: 25px;
+            list-style: none;
+            padding: 0;
+            gap: 5px;
+        }
+
+        .pagination li a,
+        .pagination li span {
+            padding: 10px 15px;
+            background-color: #fff;
+            color: #990000;
+            border-radius: 6px;
+            border: 1px solid #ddd;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            font-weight: 500;
+            display: inline-block;
+        }
+
+        .pagination li.active span {
+            background-color: #990000;
+            color: white;
+            border-color: #990000;
+            box-shadow: 0 2px 5px rgba(153, 0, 0, 0.2);
+        }
+
+        .pagination li a:hover {
+            background-color: #f5f5f5;
+            border-color: #990000;
+            transform: translateY(-2px);
+        }
     </style>
     @if (file_exists(public_path('build/manifest.json')) || file_exists(public_path('hot')))
-        @vite(['resources/css/app.css', 'resources/js/app.js'])
+    @vite(['resources/css/app.css', 'resources/js/app.js'])
     @endif
 </head>
 
@@ -236,21 +271,24 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach ($pengaduan as $i => $aduan)
+                    @php
+                    $i = ($pengaduan->currentPage() - 1) * $pengaduan->perPage() + 1;
+                    @endphp
+                    @foreach ($pengaduan as $data)
                     <tr>
-                        <td>{{ $i+1 }}</td>
-                        <td>{{ htmlspecialchars($aduan['tanggal']) }}</td>
-                        <td>{{ htmlspecialchars($aduan['nama']) }}</td>
-                        <td>{{ htmlspecialchars($aduan['nik']) }}</td>
-                        <td><?= htmlspecialchars($aduan['alamat']) ?></td>
-                        <td><?= htmlspecialchars($aduan['no_hp']) ?></td>
-                        <td><?= htmlspecialchars($aduan['judul']) ?></td>
-                        <td><?= htmlspecialchars($aduan['laporan']) ?></td>
-                        <td><img src="admin/<?= htmlspecialchars($aduan['foto']) ?>" class="foto" alt="Foto Pengaduan"></td>
-                        <td><?= htmlspecialchars($aduan['status']) ?></td>
+                        <td>{{ $i++ }}</td>
+                        <td>{{ Carbon\Carbon::parse($data->tanggal)->format('Y-m-d') }}</td>
+                        <td>{{ $data->nama}}</td>
+                        <td>{{ $data->nik }}</td>
+                        <td>{{ $data->alamat }}</td>
+                        <td>{{ $data->no_hp }}</td>
+                        <td>{{ $data->judul }}</td>
+                        <td>{{ $data->laporan }}</td>
+                        <td><img src="admin/{{ $data->foto }}" class="foto" alt="Foto Pengaduan"></td>
+                        <td>{{ $data->status }}</td>
                         <td>
                             <form method="post" style="margin-bottom:4px;">
-                                <input type="hidden" name="id" value="<?= $aduan['id'] ?>">
+                                <input type="hidden" name="id" value="{{ $data->id }}">
                                 <select name="status" required>
                                     <option value="">--Status--</option>
                                     <option value="Diproses">Diproses</option>
@@ -258,9 +296,9 @@
                                 </select><br>
                                 <button type="submit" name="verifikasi" class="btn btn-verifikasi">Verifikasi</button>
                             </form>
-                            <button class="btn btn-tanggapi" onclick="openModal(<?= htmlspecialchars(json_encode($aduan)) ?>)">Tanggapi</button>
+                            <button class="btn btn-tanggapi" onclick="openModal(<?= htmlspecialchars(json_encode($data)) ?>)">Tanggapi</button>
                             <form method="post" style="display:inline;">
-                                <input type="hidden" name="id" value="<?= $aduan['id'] ?>">
+                                <input type="hidden" name="id" value="{{ $data['id'] }}">
                                 <button type="submit" name="hapus" class="btn btn-hapus">Hapus</button>
                             </form>
                         </td>
@@ -268,6 +306,9 @@
                     @endforeach
                 </tbody>
             </table>
+            <div>
+                {{ $pengaduan->links() }}
+            </div>
         </div>
     </div>
 

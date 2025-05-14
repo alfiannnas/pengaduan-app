@@ -160,10 +160,45 @@
             font-size: 12px;
             font-weight: bold;
         }
+
+        .pagination {
+            display: flex;
+            justify-content: start;
+            margin-top: 25px;
+            list-style: none;
+            padding: 0;
+            gap: 5px;
+        }
+
+        .pagination li a,
+        .pagination li span {
+            padding: 10px 15px;
+            background-color: #fff;
+            color: #990000;
+            border-radius: 6px;
+            border: 1px solid #ddd;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            font-weight: 500;
+            display: inline-block;
+        }
+
+        .pagination li.active span {
+            background-color: #990000;
+            color: white;
+            border-color: #990000;
+            box-shadow: 0 2px 5px rgba(153, 0, 0, 0.2);
+        }
+
+        .pagination li a:hover {
+            background-color: #f5f5f5;
+            border-color: #990000;
+            transform: translateY(-2px);
+        }
     </style>
 
     @if (file_exists(public_path('build/manifest.json')) || file_exists(public_path('hot')))
-        @vite(['resources/css/app.css', 'resources/js/app.js'])
+    @vite(['resources/css/app.css', 'resources/js/app.js'])
     @endif
 </head>
 
@@ -223,6 +258,9 @@
                     @endforeach
                 </tbody>
             </table>
+            <div>
+                {{ $tanggapan->links() }}
+            </div>
         </div>
     </div>
 
