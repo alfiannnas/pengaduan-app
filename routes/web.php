@@ -1,7 +1,18 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\AuthController;
+use App\Http\Controllers\AdminController;
 
-Route::get('/', function () {
-    return view('login');
+// Login
+Route::get('/login', [AuthController::class, 'showLoginForm'])->name('login');
+Route::post('/login', [AuthController::class, 'login']);
+
+// Registration
+Route::get('/registration', [AuthController::class, 'showRegistrationForm'])->name('registration');
+Route::post('/registration', [AuthController::class, 'register']);
+
+// Admin
+Route::prefix('admin')->middleware('auth')->group(function () {
+    Route::get('/dashboard', [AdminController::class, 'dashboard'])->name('admin.dashboard');
 });
