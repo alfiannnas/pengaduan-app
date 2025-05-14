@@ -201,8 +201,8 @@
         </div>
         <hr>
         <a href="dashboard.php"><span>🏠</span> Dashboard</a>
-        <a href="data_tanggapan.php" class="active"><span>✅</span> Data Tanggapan</a>
-        <a href="data_pengaduan.php"><span>📄</span> Data Pengaduan</a>
+        <a href="{{ route('admin.data-tanggapan') }}" class="active"><span>✅</span> Data Tanggapan</a>
+        <a href="{{ route('admin.data-pengaduan') }}"><span>📄</span> Data Pengaduan</a>
         <a href="data_petugas.php"><span>👮</span> Data Petugas</a>
         <a href="data_masyarakat.php"><span>👥</span> Data Masyarakat</a>
         <a href="profile_desa.php"><span>🏡</span> Profil Desa</a>
