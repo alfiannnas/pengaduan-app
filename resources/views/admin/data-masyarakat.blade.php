@@ -213,9 +213,10 @@
                         <td>{{ $data['telephone'] }}</td>
                         <td>{{ $data['level'] }}</td>
                         <td>
-                            <form method="post" style="display:inline;">
-                                <input type="hidden" name="id" value="{{ $data['id'] }}">
-                                <button type="submit" name="hapus" class="btn btn-hapus">Hapus</button>
+                            <form action="{{ route('admin.delete-masyarakat', $data['id']) }}" method="POST" style="display:inline;">
+                                @csrf
+                                @method('DELETE') 
+                                <button type="submit" class="btn btn-hapus" onclick="return confirm('Apakah Anda yakin ingin menghapus data ini?')">Hapus</button>
                             </form>
                         </td>
                     </tr>

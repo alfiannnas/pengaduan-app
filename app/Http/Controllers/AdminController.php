@@ -34,10 +34,24 @@ class AdminController extends Controller
         return view('admin.data-petugas', compact('petugas'));
     }
 
+    public function deletePetugas($id)
+    {
+        $petugas = User::find($id);
+        $petugas->delete();
+        return redirect()->back()->with('success', 'Petugas berhasil dihapus');
+    }
+
     public function dataMasyarakat()
     {
         $masyarakat = User::where('level', 'Masyarakat')
             ->paginate(10);
         return view('admin.data-masyarakat', compact('masyarakat'));
+    }
+
+    public function deleteMasyarakat($id)
+    {
+        $masyarakat = User::find($id);
+        $masyarakat->delete();
+        return redirect()->back()->with('success', 'Masyarakat berhasil dihapus');
     }
 }

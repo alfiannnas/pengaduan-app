@@ -17,6 +17,10 @@ Route::prefix('admin')->middleware('auth')->group(function () {
     Route::get('/dashboard', [AdminController::class, 'dashboard'])->name('admin.dashboard');
     Route::get('/data-pengaduan', [AdminController::class, 'dataPengaduan'])->name('admin.data-pengaduan');
     Route::get('/data-tanggapan', [AdminController::class, 'dataTanggapan'])->name('admin.data-tanggapan');
+
+    Route::delete('/data-petugas/{id}', [AdminController::class, 'deletePetugas'])->name('admin.delete-petugas');
     Route::get('/data-petugas', [AdminController::class, 'dataPetugas'])->name('admin.data-petugas');
+
+    Route::delete('/data-masyarakat/{id}', [AdminController::class, 'deleteMasyarakat'])->name('admin.delete-masyarakat');
     Route::get('/data-masyarakat', [AdminController::class, 'dataMasyarakat'])->name('admin.data-masyarakat');
 });
