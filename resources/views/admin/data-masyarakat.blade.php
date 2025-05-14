@@ -160,6 +160,81 @@
             border-color: #990000;
             transform: translateY(-2px);
         }
+
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            justify-content: center;
+            align-items: center;
+        }
+
+        .modal-content {
+            background: #fff;
+            padding: 20px;
+            border-radius: 12px;
+            width: 400px;
+            position: relative;
+        }
+
+        .modal-content h2 {
+            margin-top: 0;
+        }
+
+        .close {
+            position: absolute;
+            top: 10px;
+            right: 15px;
+            font-size: 20px;
+            cursor: pointer;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+
+        .form-group input,
+        .form-group select {
+            width: 100%;
+            padding: 8px;
+            border-radius: 6px;
+            border: 1px solid #ccc;
+        }
+
+        .form-submit {
+            background: #6a0dad;
+            color: white;
+            width: 100%;
+            padding: 10px;
+            border: none;
+            border-radius: 6px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .message {
+            background-color: #fff3cd;
+            color: #856404;
+            margin-bottom: 20px;
+            padding: 15px;
+            border-radius: 8px;
+            border-left: 5px solid #ffc107;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            font-size: 14px;
+            font-weight: 500;
+            position: relative;
+            line-height: 1.5;
+        }
     </style>
     @if (file_exists(public_path('build/manifest.json')) || file_exists(public_path('hot')))
     @vite(['resources/css/app.css', 'resources/js/app.js'])
@@ -186,9 +261,17 @@
     <div class="content">
         <div class="breadcrumb">Pages / Masyarakat</div>
         <h1>Masyarakat</h1>
+        
+        @if ($errors->any())
+        <div class="message">
+            @foreach ($errors->all() as $error)
+            {{ $error }}<br>
+            @endforeach
+        </div>
+        @endif
 
         <div class="card-table">
-            <a href="tambah_data.php" class="btn btn-tambah">Tambah Data</a>
+            <a href="#" id="openModal" class="btn btn-tambah">Tambah Data</a>
 
             <table>
                 <thead>
@@ -230,6 +313,63 @@
         </div>
 
     </div>
+        <!-- Modal Tambah Data -->
+        <div class="modal" id="modalForm">
+        <div class="modal-content">
+            <span class="close" id="closeModal">&times;</span>
+            <h2>Tambah Masyarakat</h2>
+            <form action="{{ route('admin.store-masyarakat') }}" method="POST">
+                @csrf
+                <div class="form-group">
+                    <label>Nama</label>
+                    <input type="text" name="name" required>
+                </div>
+                <div class="form-group">
+                    <label>NIK</label>
+                    <input type="number" name="nik" required>
+                </div>
+                <div class="form-group">
+                    <label>Username</label>
+                    <input type="text" name="username" required>
+                </div>
+                <div class="form-group">
+                    <label>Password</label>
+                    <input type="password" name="password" required>
+                </div>
+                <div class="form-group">
+                    <label>Nomor Telepon</label>
+                    <input type="number" name="telephone" required>
+                </div>
+                <div class="form-group">
+                    <label>Level</label>
+                    <select name="level" required>
+                        <option value="Masyarakat">Masyarakat</option>
+                    </select>
+                </div>
+                <button type="submit" class="form-submit">Simpan</button>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        const modal = document.getElementById('modalForm');
+        const openBtn = document.getElementById('openModal');
+        const closeBtn = document.getElementById('closeModal');
+
+        openBtn.onclick = function() {
+            modal.style.display = 'flex';
+        }
+
+        closeBtn.onclick = function() {
+            modal.style.display = 'none';
+        }
+
+        window.onclick = function(e) {
+            if (e.target == modal) {
+                modal.style.display = 'none';
+            }
+        }
+    </script>
 
 </body>
 

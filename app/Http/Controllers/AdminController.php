@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Pengaduan;
 use App\Models\Tanggapan;
 use App\Models\User;
+use Illuminate\Support\Facades\Hash;
 
 class AdminController extends Controller
 {
@@ -33,6 +34,63 @@ class AdminController extends Controller
             ->paginate(10);
         return view('admin.data-petugas', compact('petugas'));
     }
+
+    public function createPetugas()
+    {
+        return view('admin.create-petugas');
+    }
+
+    public function storePetugas(Request $request)
+    {
+        $request->validate([
+            'name' => 'required',
+            'nik' => 'required|unique:users',
+            'username' => 'required|unique:users',
+            'password' => 'required|min:8',
+            'telephone' => 'required|unique:users',
+            'level' => 'required',
+        ]);
+
+        $user = new User();
+        $user->name = $request->name;
+        $user->nik = $request->nik;
+        $user->username = $request->username;
+        $user->password = Hash::make($request->password);
+        $user->telephone = $request->telephone;
+        $user->level = $request->level;
+        $user->save();
+
+        return redirect()->route('admin.data-petugas')->with('success', 'Petugas berhasil ditambahkan');
+    }
+
+    public function createMasyarakat()
+    {
+        return view('admin.create-masyarakat');
+    }
+
+    public function storeMasyarakat(Request $request)
+    {
+        $request->validate([
+            'name' => 'required',
+            'nik' => 'required|unique:users',
+            'username' => 'required|unique:users',
+            'password' => 'required|min:8',
+            'telephone' => 'required|unique:users',
+            'level' => 'required',
+        ]);
+
+        $user = new User();
+        $user->name = $request->name;
+        $user->nik = $request->nik;
+        $user->username = $request->username;
+        $user->password = Hash::make($request->password);
+        $user->telephone = $request->telephone;
+        $user->level = $request->level;
+        $user->save();
+
+        return redirect()->route('admin.data-masyarakat')->with('success', 'Masyarakat berhasil ditambahkan');
+    }
+    
 
     public function deletePetugas($id)
     {

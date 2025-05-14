@@ -20,7 +20,10 @@ Route::prefix('admin')->middleware('auth')->group(function () {
 
     Route::delete('/data-petugas/{id}', [AdminController::class, 'deletePetugas'])->name('admin.delete-petugas');
     Route::get('/data-petugas', [AdminController::class, 'dataPetugas'])->name('admin.data-petugas');
-
+    Route::get('/data-petugas/create', [AdminController::class, 'createPetugas'])->name('admin.create-petugas');
+    Route::post('/data-petugas', [AdminController::class, 'storePetugas'])->name('admin.store-petugas');
+    
+    Route::post('/data-masyarakat', [AdminController::class, 'storeMasyarakat'])->name('admin.store-masyarakat');
     Route::delete('/data-masyarakat/{id}', [AdminController::class, 'deleteMasyarakat'])->name('admin.delete-masyarakat');
     Route::get('/data-masyarakat', [AdminController::class, 'dataMasyarakat'])->name('admin.data-masyarakat');
 });
