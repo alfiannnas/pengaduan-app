@@ -37,28 +37,29 @@ class AdminController extends Controller
     public function exportTanggapan(Request $request)
     {
         $tanggapan = Tanggapan::with('pengaduan')->get();
-        
+
         return Excel::download(
-            new class($tanggapan) implements \Maatwebsite\Excel\Concerns\FromCollection, 
+            new class($tanggapan) implements
+                \Maatwebsite\Excel\Concerns\FromCollection,
                 \Maatwebsite\Excel\Concerns\WithHeadings,
                 \Maatwebsite\Excel\Concerns\WithMapping {
-                
+
                 protected $tanggapan;
-                
+
                 public function __construct($tanggapan)
                 {
                     $this->tanggapan = $tanggapan;
                 }
-                
+
                 public function collection()
                 {
                     return $this->tanggapan;
                 }
-                
+
                 public function headings(): array
                 {
                     return [
-                        
+
                         'No',
                         'Tanggal',
                         'Nama',
@@ -71,7 +72,7 @@ class AdminController extends Controller
                     ];
                 }
                 private $counter = 1;
-                
+
                 public function map($row): array
                 {
                     return [
@@ -93,7 +94,7 @@ class AdminController extends Controller
 
     public function dataPengaduan()
     {
-        $pengaduan = Pengaduan::paginate(10);
+        $pengaduan = Pengaduan::with('tanggapanDetail')->paginate(10);
         return view('admin.data-pengaduan', compact('pengaduan'));
     }
 
@@ -111,24 +112,25 @@ class AdminController extends Controller
     public function exportPengaduan(Request $request)
     {
         $pengaduan = Pengaduan::with('tanggapanDetail')->get();
-        
+
         return Excel::download(
-            new class($pengaduan) implements \Maatwebsite\Excel\Concerns\FromCollection, 
+            new class($pengaduan) implements
+                \Maatwebsite\Excel\Concerns\FromCollection,
                 \Maatwebsite\Excel\Concerns\WithHeadings,
                 \Maatwebsite\Excel\Concerns\WithMapping {
-                
+
                 protected $pengaduan;
-                
+
                 public function __construct($pengaduan)
                 {
                     $this->pengaduan = $pengaduan;
                 }
-                
+
                 public function collection()
                 {
                     return $this->pengaduan;
                 }
-                
+
                 public function headings(): array
                 {
                     return [
@@ -138,13 +140,13 @@ class AdminController extends Controller
                         'NIK',
                         'Alamat',
                         'No HP',
-                        'Judul', 
+                        'Judul',
                         'Laporan',
                         'Status',
                         'Tanggapan',
                     ];
                 }
-                
+
                 public function map($row): array
                 {
                     static $i = 1;
@@ -155,7 +157,7 @@ class AdminController extends Controller
                         $row->nik ?? 'N/A',
                         $row->alamat ?? 'N/A',
                         $row->no_hp ?? 'N/A',
-                        $row->judul ?? 'N/A', 
+                        $row->judul ?? 'N/A',
                         $row->laporan ?? 'N/A',
                         $row->status,
                         $row->tanggapanDetail->tanggapan ?? 'N/A',
@@ -164,6 +166,23 @@ class AdminController extends Controller
             },
             'pengaduan.xlsx'
         );
+    }
+
+    public function verifikasiPengaduan(Request $request)
+    {
+        $pengaduan = Pengaduan::find($request->pengaduan_id);
+        $pengaduan->status = $request->status;
+        $pengaduan->save();
+        return redirect()->back()->with('success', 'Pengaduan berhasil diverifikasi');
+    }
+
+    public function tanggapiPengaduan(Request $request)
+    {
+        $pengaduanId = Pengaduan::find($request->pengaduan_id);
+        $tanggapan = Tanggapan::where('pengaduan_id', $pengaduanId->id)->first();
+        $tanggapan->tanggapan = $request->tanggapan;
+        $tanggapan->save();
+        return redirect()->back()->with('success', 'Pengaduan berhasil ditanggapi');
     }
 
     public function dataPetugas()
@@ -229,7 +248,6 @@ class AdminController extends Controller
 
         return redirect()->route('admin.data-masyarakat')->with('success', 'Masyarakat berhasil ditambahkan');
     }
-    
 
     public function deletePetugas($id)
     {

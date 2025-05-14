@@ -34,6 +34,7 @@ Route::prefix('admin')->middleware('auth')->group(function () {
 
     Route::post('/export-pengaduan', [AdminController::class, 'exportPengaduan'])->name('admin.export-pengaduan');
     Route::post('/export-tanggapan', [AdminController::class, 'exportTanggapan'])->name('admin.export-tanggapan');
-    
+    Route::post('/verifikasi-pengaduan', [AdminController::class, 'verifikasiPengaduan'])->name('admin.verifikasi-pengaduan');
+    Route::post('/tanggapi-pengaduan', [AdminController::class, 'tanggapiPengaduan'])->name('admin.tanggapi-pengaduan');
     Route::get('/profil-desa', [AdminController::class, 'profilDesa'])->name('admin.profil-desa');
 });

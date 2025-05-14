@@ -222,6 +222,76 @@
             border-color: #990000;
             transform: translateY(-2px);
         }
+
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            justify-content: center;
+            align-items: center;
+        }
+
+        .modal-content {
+            background: #fff;
+            padding: 20px;
+            border-radius: 12px;
+            width: 400px;
+            position: relative;
+        }
+
+        .modal-content h2 {
+            margin-top: 0;
+        }
+
+        .close {
+            position: absolute;
+            top: 10px;
+            right: 15px;
+            font-size: 20px;
+            cursor: pointer;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+
+        .form-group input,
+        .form-group select {
+            width: 100%;
+            padding: 8px;
+            border-radius: 6px;
+            border: 1px solid #ccc;
+        }
+
+        .form-submit {
+            background: #6a0dad;
+            color: white;
+            width: 100%;
+            border: none;
+            border-radius: 6px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        textarea {
+            width: 100%;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+            box-sizing: border-box;
+            padding: 8px;
+            resize: vertical;
+            min-height: 80px;
+        }
     </style>
     @if (file_exists(public_path('build/manifest.json')) || file_exists(public_path('hot')))
     @vite(['resources/css/app.css', 'resources/js/app.js'])
@@ -287,21 +357,23 @@
                         <td>{{ $data->laporan }}</td>
                         <td><img src="admin/{{ $data->foto }}" class="foto" alt="Foto Pengaduan"></td>
                         <td>{{ $data->status }}</td>
-                        <td>
-                            <form method="post" style="margin-bottom:4px;">
-                                <input type="hidden" name="id" value="{{ $data->id }}">
-                                <select name="status" required>
+                        <td style="display: flex; flex-direction: column; gap: 4px;">
+                            <form method="post" action="{{ route('admin.verifikasi-pengaduan') }}">
+                                @csrf
+                                <input type="hidden" name="pengaduan_id" value="{{ $data->id }}">
+                                <select style="width: 100%; margin-bottom: 5px;" name="status" required>
                                     <option value="">--Status--</option>
                                     <option value="Diproses">Diproses</option>
                                     <option value="Ditolak">Ditolak</option>
                                 </select><br>
-                                <button type="submit" name="verifikasi" class="btn btn-verifikasi">Verifikasi</button>
+                                <button type="submit" name="verifikasi" class="btn btn-verifikasi" style="width: 100%;">Verifikasi</button>
                             </form>
-                            <button class="btn btn-tanggapi" onclick="openModal(<?= htmlspecialchars(json_encode($data)) ?>)">Tanggapi</button>
-                            <form action="{{ route('admin.delete-pengaduan', $data['id']) }}" method="POST" style="display:inline;">
+
+                            <button class="btn btn-tanggapi" style="width: 100%;" onclick="openModal(<?= htmlspecialchars(json_encode($data)) ?>)">Tanggapi</button>
+                            <form action="{{ route('admin.delete-pengaduan', $data['id']) }}" method="POST">
                                 @csrf
                                 @method('DELETE')
-                                <button type="submit" class="btn btn-hapus" onclick="return confirm('Apakah Anda yakin ingin menghapus data ini?')">Hapus</button>
+                                <button type="submit" class="btn btn-hapus" style="width: 100%;" onclick="return confirm('Apakah Anda yakin ingin menghapus data ini?')">Hapus</button>
                             </form>
                         </td>
                     </tr>
@@ -314,43 +386,81 @@
         </div>
     </div>
 
-    <div class="modal" id="modalTanggapi">
+    <!-- Modal Tanggapan Pengaduan -->
+    <div class="modal" id="modalTanggapan">
         <div class="modal-content">
-            <form method="post">
-                <input type="hidden" name="id" id="modalId">
+            <span class="close" id="closeTanggapanModal">&times;</span>
+            <h2>Tanggapan Pengaduan</h2>
+            <div id="detailPengaduan">
+                <img id="fotoDetail" src="" alt="Foto Pengaduan" class="foto">
                 <div class="form-group">
-                    <label>Tanggal</label>
-                    <input type="text" id="modalTanggal" readonly>
+                    <label>Tanggal:</label>
+                    <div id="tanggalDetail"></div>
                 </div>
                 <div class="form-group">
-                    <label>Judul</label>
-                    <input type="text" id="modalJudul" readonly>
+                    <label>Nama:</label>
+                    <div id="namaDetail"></div>
                 </div>
                 <div class="form-group">
-                    <label>Isi</label>
-                    <textarea id="modalIsi" readonly></textarea>
+                    <label>NIK:</label>
+                    <div id="nikDetail"></div>
                 </div>
                 <div class="form-group">
-                    <label>Foto</label><br>
-                    <img id="modalFoto" src="" alt="Foto Pengaduan">
+                    <label>Judul:</label>
+                    <div id="judulDetail"></div>
                 </div>
                 <div class="form-group">
-                    <label>Tanggapan</label>
-                    <textarea name="tanggapan" required></textarea>
+                    <label>Laporan:</label>
+                    <div id="laporanDetail"></div>
                 </div>
-                <button type="submit" name="tanggapi" class="btn btn-verifikasi">Tanggapi</button>
+            </div>
+            <form action="{{ route('admin.tanggapi-pengaduan') }}" method="POST">
+                @csrf
+                <input type="hidden" name="pengaduan_id" id="pengaduanId">
+                <div class="form-group">
+                    <label>Tanggapan:</label>
+                    <textarea name="tanggapan" id="tanggapanTextarea" rows="4" required></textarea>
+                </div>
+                <button type="submit" class="btn btn-verifikasi">Tanggapi</button>
             </form>
         </div>
     </div>
 
     <script>
-        function openModal(aduan) {
-            document.getElementById('modalId').value = aduan.id;
-            document.getElementById('modalTanggal').value = aduan.tanggal;
-            document.getElementById('modalJudul').value = aduan.judul;
-            document.getElementById('modalIsi').value = aduan.laporan;
-            document.getElementById('modalFoto').src = "admin/" + aduan.foto;
-            document.getElementById('modalTanggapi').style.display = 'flex';
+        const modalTanggapan = document.getElementById('modalTanggapan');
+        const closeTanggapanBtn = document.getElementById('closeTanggapanModal');
+
+        function openModal(data) {
+            document.getElementById('fotoDetail').src = "admin/" + data.foto;
+            document.getElementById('tanggalDetail').textContent = data.tanggal;
+            document.getElementById('namaDetail').textContent = data.nama;
+            document.getElementById('nikDetail').textContent = data.nik;
+            document.getElementById('judulDetail').textContent = data.judul;
+            document.getElementById('laporanDetail').textContent = data.laporan;
+            document.getElementById('pengaduanId').value = data.id;
+            
+            // Memuat data tanggapan jika ada
+            if (data.tanggapan_detail && data.tanggapan_detail.tanggapan) {
+                document.getElementById('tanggapanTextarea').value = data.tanggapan_detail.tanggapan;
+                console.log(data.tanggapan_detail.tanggapan);
+            } else {
+                console.log('tidak ada tanggapan');
+                document.getElementById('tanggapanTextarea').value = '';
+            }
+
+            modalTanggapan.style.display = 'flex';
+        }
+
+        if (closeTanggapanBtn) {
+            closeTanggapanBtn.onclick = function() {
+                modalTanggapan.style.display = 'none';
+            }
+        }
+
+        window.onclick = function(e) {
+            if (e.target == modalTanggapan) {
+                modalTanggapan.style.display = 'none';
+            }
         }
     </script>
 
