@@ -113,6 +113,28 @@
             margin-top: 15px;
             font-weight: bold;
         }
+
+        .btn-secondary,
+        .btn-primary {
+            width: 41%;
+            padding: 12px;
+            border: none;
+            border-radius: 10px;
+            font-size: 16px;
+            cursor: pointer;
+            color: white;
+            text-align: center;
+            display: inline-block;
+            text-decoration: none;
+        }
+
+        .btn-secondary {
+            background: #cc3333;
+        }
+
+        .btn-primary {
+            background: #3300cc;
+        }
     </style>
 </head>
 
@@ -121,12 +143,20 @@
 
     <div class="form-box">
         <h1>REGISTRASI</h1>
-        <form method="POST" action="">
+        @if ($errors->any())
+        <div class="message">
+            @foreach ($errors->all() as $error)
+            {{ $error }}<br>
+            @endforeach
+        </div>
+        @endif
+        <form method="POST" action="{{ route('registration') }}">
+            @csrf
             <label>NIK</label>
             <input type="text" name="nik" placeholder="Masukkan NIK" required>
 
             <label>Nama Lengkap</label>
-            <input type="text" name="nama" placeholder="Masukkan Nama Lengkap" required>
+            <input type="text" name="name" placeholder="Masukkan Nama Lengkap" required>
 
             <label>Username</label>
             <input type="text" name="username" placeholder="Masukkan Username" required>
@@ -141,22 +171,18 @@
 
             <label>Nomor Telepon</label>
             <div class="input-group">
-                <input type="text" name="telepon" id="telepon" placeholder="Masukkan Nomor Telepon" required>
-                <span class="eye-icon" onclick="togglePassword('telepon', this)">
+                <input type="text" name="telephone" id="telephone" placeholder="Masukkan Nomor Telepon" required>
+                <span class="eye-icon" onclick="togglePassword('telephone', this)">
                 </span>
             </div>
 
             <button type="submit" class="btn-register">DAFTAR</button>
 
             <div class="btn-group">
-                <button type="button" class="btn-back" onclick="history.back()">Kembali</button>
-                <button type="button" class="btn-login" onclick="window.location.href='login.php'">Login</button>
+                <a href="{{ url()->previous() }}" class="btn-secondary">Kembali</a>
+                <a href="{{ route('login') }}" class="btn-primary">Login</a>
             </div>
         </form>
-
-        <?php if (!empty($registerMessage)): ?>
-            <div class="message"><?= $registerMessage ?></div>
-        <?php endif; ?>
     </div>
 
     <script>
