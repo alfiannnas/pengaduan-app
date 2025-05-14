@@ -137,7 +137,7 @@
         <a href="{{ route('admin.data-petugas') }}"><span>👮</span> Data Petugas</a>
         <a href="{{ route('admin.data-masyarakat') }}"><img src="https://cdn-icons-png.flaticon.com/512/1077/1077114.png" alt="Masyarakat" style="width:20px;"> Data Masyarakat</a>
         <a href="{{ route('admin.profil-desa') }}"><span>🏡</span> Profil Desa</a>
-        <a href="{{ route('login') }}" class="logout"><span>🚪</span> Keluar</a>
+        <a href="{{ route('logout') }}" class="logout"><span>🚪</span> Keluar</a>
     </div>
 
     <div class="content">

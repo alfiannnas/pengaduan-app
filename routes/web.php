@@ -12,6 +12,9 @@ Route::post('/login', [AuthController::class, 'login']);
 Route::get('/registration', [AuthController::class, 'showRegistrationForm'])->name('registration');
 Route::post('/registration', [AuthController::class, 'register']);
 
+// Logout
+Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
+
 // Admin
 Route::prefix('admin')->middleware('auth')->group(function () {
     Route::get('/dashboard', [AdminController::class, 'dashboard'])->name('admin.dashboard');

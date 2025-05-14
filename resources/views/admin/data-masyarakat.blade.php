@@ -255,7 +255,7 @@
         <a href="{{ route('admin.data-petugas') }}"><span>👮</span> Data Petugas</a>
         <a href="{{ route('admin.data-masyarakat') }}"><span>👥</span> Data Masyarakat</a>
         <a href="{{ route('admin.profil-desa') }}"><span>🏡</span> Profil Desa</a>
-        <a href="{{ route('login') }}" class="logout"><span>🚪</span> Keluar</a>
+        <a href="{{ route('logout') }}" class="logout"><span>🚪</span> Keluar</a>
     </div>
 
     <div class="content">
