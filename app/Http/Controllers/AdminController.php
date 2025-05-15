@@ -23,7 +23,9 @@ class AdminController extends Controller
 
     public function dataTanggapan()
     {
-        $tanggapan = Tanggapan::with('pengaduan')->paginate(10);
+            $tanggapan = Tanggapan::with('pengaduan')
+                ->whereHas('pengaduan')
+                ->paginate(10);
         return view('admin.data-tanggapan', compact('tanggapan'));
     }
 
