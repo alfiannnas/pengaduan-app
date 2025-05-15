@@ -229,7 +229,7 @@
                     <div class="dropdown-sub">
                         <a href="#">Pengaduan Administratif</a>
                         <div class="dropdown-sub-content">
-                            <a href="">Kesalahan Penulisan Data Pribadi</a>
+                            <a href="{{ route('kesalahan-penulisan-data') }}">Kesalahan Penulisan Data Pribadi</a>
                             <a href="">Permasalahan Dokumen</a>
                             <a href="">Keterlambatan Proses Administratif</a>
                             <a href="">Pelayanan Tidak Sesuai Prosedur</a>

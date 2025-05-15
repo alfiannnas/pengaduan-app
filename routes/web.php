@@ -48,4 +48,7 @@ Route::middleware('auth')->group(function () {
 
     Route::get('/pengaduan-lingkungan', [MasyarakatController::class, 'pengaduanLingkungan'])->name('pengaduan-lingkungan');
     Route::post('/pengaduan-lingkungan', [MasyarakatController::class, 'storePengaduanLingkungan'])->name('pengaduan-lingkungan.store');
+
+    Route::get('/kesalahan-penulisan-data', [MasyarakatController::class, 'kesalahanPenulisanData'])->name('kesalahan-penulisan-data');
+    Route::post('/kesalahan-penulisan-data', [MasyarakatController::class, 'storeKesalahanPenulisanData'])->name('kesalahan-penulisan-data.store');
 });

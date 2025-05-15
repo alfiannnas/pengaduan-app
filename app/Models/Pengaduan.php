@@ -19,7 +19,8 @@ class Pengaduan extends Model
         'judul',
         'laporan',
         'foto',
-        'status'
+        'status',
+        'email',
     ];
 
     public function tanggapanDetail()
