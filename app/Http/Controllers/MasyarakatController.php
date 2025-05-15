@@ -235,6 +235,30 @@ class MasyarakatController extends Controller
         $pengaduan->delete();
         return redirect()->back()->with('success', 'Pengaduan berhasil dihapus');
     }
-    
+
+    public function sejarahDesa()
+    {
+        return view('sejarah-desa');
+    }
+
+    public function strukturOrganisasi()
+    {
+        return view('struktur-organisasi');
+    }
+
+    public function visiMisi()
+    {
+        return view('visi-misi');
+    }
+
+    public function lokasi()
+    {
+        return view('lokasi');
+    }
+
+    public function kontak()
+    {
+        return view('kontak');
+    }
 
 }
