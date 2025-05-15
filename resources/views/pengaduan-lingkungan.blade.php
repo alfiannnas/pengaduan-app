@@ -262,20 +262,6 @@
             padding: 10px;
             font-size: 14px;
         }
-
-        .message {
-            background-color: #fff3cd;
-            color: #856404;
-            margin-bottom: 20px;
-            padding: 15px;
-            border-radius: 8px;
-            border-left: 5px solid #ffc107;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-            font-size: 14px;
-            font-weight: 500;
-            position: relative;
-            line-height: 1.5;
-        }
     </style>
 </head>
 
@@ -328,11 +314,6 @@
 
     <!-- Formulir -->
     <div class="form-container">
-        @if($message = session('error'))
-            <div class="error">{{ $message }}</div>
-        @elseif($message = session('success'))
-            <div class="message">{{ $message }}</div>
-        @endif
         <div class="form-header">
             <h2>FORMULIR PENGADUAN LINGKUNGAN</h2>
             <button onclick="window.history.back()">X</button>
@@ -357,10 +338,10 @@
     </div>
 
     <!-- Popup -->
-    <div class="popup" id="popupSukses">
+    <div class="popup" id="popupSuccess">
         <div class="popup-content">
             <img src="https://cdn-icons-png.flaticon.com/512/190/190411.png" alt="Centang">
-            <h2>DATA BERHASIL TERKIRIM</h2>
+            <h2>{{ session('success') ?? 'DATA BERHASIL TERKIRIM' }}</h2>
         </div>
     </div>
 
@@ -397,14 +378,17 @@
         Copyright © 2025 All rights reserved | Fajar Arif Yanto
     </div>
 
-    <?php if (isset($success) && $success): ?>
-        <script>
-            document.getElementById('popupSukses').classList.add('show');
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            @if(session('success'))
+            const popup = document.getElementById('popupSuccess');
+            popup.classList.add('show');
             setTimeout(function() {
-                document.getElementById('popupSukses').classList.remove('show');
+                popup.classList.remove('show');
             }, 3000);
-        </script>
-    <?php endif; ?>
+            @endif
+        });
+    </script>
 
 </body>
 

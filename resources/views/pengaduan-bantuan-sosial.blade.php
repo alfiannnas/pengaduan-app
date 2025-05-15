@@ -258,19 +258,6 @@
             padding: 10px;
             font-size: 14px;
         }
-        .message {
-            background-color: #fff3cd;
-            color: #856404;
-            margin-bottom: 20px;
-            padding: 15px;
-            border-radius: 8px;
-            border-left: 5px solid #ffc107;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-            font-size: 14px;
-            font-weight: 500;
-            position: relative;
-            line-height: 1.5;
-        }
     </style>
 </head>
 
@@ -316,13 +303,7 @@
         </nav>
     </header>
 
-
     <div class="form-container">
-    @if($message = session('error'))
-            <div class="error">{{ $message }}</div>
-        @elseif($message = session('success'))
-            <div class="message">{{ $message }}</div>
-        @endif
         <div class="form-header">
             <h2>FORMULIR PENGADUAN BANTUAN SOSIAL</h2>
             <button onclick="window.history.back()">X</button>
@@ -348,8 +329,8 @@
 
     <div class="popup" id="popupSuccess">
         <div class="popup-content">
-            <img src="image/centang.png" alt="Berhasil">
-            <h2>Data Berhasil Dikirim!</h2>
+            <img src="{{ asset('images/centang.png') }}" alt="Berhasil">
+            <h2>{{ session('success') ?? 'Data Berhasil Dikirim!' }}</h2>
         </div>
     </div>
 
@@ -382,6 +363,18 @@
     <div class="copyright">
         Copyright © 2025 All rights reserved | Fajar Arif Yanto
     </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            @if(session('success'))
+            const popup = document.getElementById('popupSuccess');
+            popup.classList.add('show');
+            setTimeout(function() {
+                popup.classList.remove('show');
+            }, 3000);
+            @endif
+        });
+    </script>
 
 </body>
 
