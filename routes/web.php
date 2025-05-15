@@ -60,4 +60,7 @@ Route::middleware('auth')->group(function () {
 
     Route::get('/pelayanan-tidak-sesuai', [MasyarakatController::class, 'pelayananTidakSesuai'])->name('pelayanan-tidak-sesuai');
     Route::post('/pelayanan-tidak-sesuai', [MasyarakatController::class, 'storePelayananTidakSesuai'])->name('pelayanan-tidak-sesuai.store');
+
+    Route::get('/pengaduan-keamanan', [MasyarakatController::class, 'pengaduanKeamanan'])->name('pengaduan-keamanan');
+    Route::post('/pengaduan-keamanan', [MasyarakatController::class, 'storePengaduanKeamanan'])->name('pengaduan-keamanan.store');
 });
