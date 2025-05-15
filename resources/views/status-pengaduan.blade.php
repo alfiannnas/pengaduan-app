@@ -252,12 +252,15 @@
             transform: translateY(-2px);
         }
     </style>
+        @if (file_exists(public_path('build/manifest.json')) || file_exists(public_path('hot')))
+        @vite(['resources/css/app.css', 'resources/js/app.js'])
+    @endif
 </head>
 
 <body>
 
     <header>
-        <img src="image/logo.png" alt="Logo Desa">
+        <img src="{{ asset('images/logo.png') }}" alt="Logo Desa">
         <strong>DESA TUNDAGAN</strong>
         <nav>
             <a href="home2.php">HOME</a>
@@ -332,7 +335,7 @@
 
     <footer>
         <div style="display: flex; align-items: center; gap: 15px;">
-            <img src="image/logo.png" alt="Logo Desa">
+            <img src="{{ asset('images/logo.png') }}" alt="Logo Desa">
             <div>
                 <h3>Desa Tundagan</h3>
                 Kecamatan Watukumpul<br>
