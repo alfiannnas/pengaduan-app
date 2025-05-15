@@ -218,12 +218,12 @@
         <img src="{{ asset('images/logo.png') }}" alt="Logo Desa">
         <strong>DESA TUNDAGAN</strong>
         <nav>
-            <a href="{{ route('masyarakat.home') }}">HOME</a>
+            <a href="{{ route('home') }}">HOME</a>
 
             <div class="dropdown">
                 <a href="#">PENGADUAN</a>
                 <div class="dropdown-content">
-                    <a href="">Pengaduan Bantuan Sosial</a>
+                    <a href="{{ route('pengaduan-bantuan-sosial') }}">Pengaduan Bantuan Sosial</a>
                     <a href="">Pengaduan Lingkungan</a>
 
                     <div class="dropdown-sub">
@@ -252,9 +252,10 @@
                     <a href="#">Kontak</a>
                 </div>
             </div>
-
-            <a href="{{ route('login') }}">LOGIN</a>
-            <a href="{{ route('registration') }}">REGISTER</a>
+            <div class="user-info">
+                <a href="{{ Auth::check() ? route('logout') : route('login') }}">{{ Auth::check() ? '👨🏻‍💼' . Auth::user()->name : 'Login' }}</a>
+                <a href="{{ Auth::check() ? route('logout') : route('registration') }}">{{ Auth::check() ? 'Logout' : 'Register' }}</a>
+            </div>
         </nav>
     </header>
 
@@ -293,7 +294,7 @@
 
         <div>
             <h3>Navigasi</h3>
-            <a href="{{ route('masyarakat.home') }}">Home</a>
+            <a href="{{ route('home') }}">Home</a>
             <a href="home1.php">Pengaduan</a>
             <a href="home1.php">Status Pengaduan</a>
             <a href="home1.php">Profil Desa</a>

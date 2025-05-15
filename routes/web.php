@@ -40,6 +40,9 @@ Route::prefix('admin')->middleware('auth')->group(function () {
     Route::get('/profil-desa', [AdminController::class, 'profilDesa'])->name('admin.profil-desa');
 });
 
-Route::prefix('masyarakat')->middleware('auth')->group(function () {
-    Route::get('/home', [MasyarakatController::class, 'home'])->name('masyarakat.home');
+Route::get('/home', [MasyarakatController::class, 'home'])->name('home');
+
+Route::middleware('auth')->group(function () {
+    Route::get('/pengaduan-bantuan-sosial', [MasyarakatController::class, 'pengaduanBantuanSosial'])->name('pengaduan-bantuan-sosial');
+    Route::post('/pengaduan-bantuan-sosial', [MasyarakatController::class, 'storePengaduanBantuanSosial'])->name('pengaduan-bantuan-sosial.store');
 });
