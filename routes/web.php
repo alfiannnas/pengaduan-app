@@ -63,4 +63,6 @@ Route::middleware('auth')->group(function () {
 
     Route::get('/pengaduan-keamanan', [MasyarakatController::class, 'pengaduanKeamanan'])->name('pengaduan-keamanan');
     Route::post('/pengaduan-keamanan', [MasyarakatController::class, 'storePengaduanKeamanan'])->name('pengaduan-keamanan.store');
+
+    Route::get('/status-pengaduan', [MasyarakatController::class, 'statusPengaduan'])->name('status-pengaduan');
 });

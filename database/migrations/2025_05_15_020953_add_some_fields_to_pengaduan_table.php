@@ -12,6 +12,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('pengaduan', function (Blueprint $table) {
+            $table->bigInteger('user_id')->nullable();
             $table->string('email')->nullable();
         });
     }
@@ -22,6 +23,7 @@ return new class extends Migration
     public function down(): void
     {
         Schema::table('pengaduan', function (Blueprint $table) {
+            $table->dropColumn('user_id');
             $table->dropColumn('email');
         });
     }
