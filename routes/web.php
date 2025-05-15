@@ -73,4 +73,8 @@ Route::middleware('auth')->group(function () {
     Route::get('/visi-misi', [MasyarakatController::class, 'visiMisi'])->name('visi-misi');
     Route::get('/lokasi', [MasyarakatController::class, 'lokasi'])->name('lokasi');
     Route::get('/kontak', [MasyarakatController::class, 'kontak'])->name('kontak');
+
+    Route::get('/profile', [MasyarakatController::class, 'profile'])->name('profile');
+    Route::get('/edit-profile', [MasyarakatController::class, 'editProfile'])->name('edit-profile');
+    Route::post('/store-profile', [MasyarakatController::class, 'storeProfile'])->name('store-profile');
 });

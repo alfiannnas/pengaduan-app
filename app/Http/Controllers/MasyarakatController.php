@@ -3,9 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Models\Pengaduan;
+use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 
 class MasyarakatController extends Controller
 {
@@ -260,5 +262,41 @@ class MasyarakatController extends Controller
     {
         return view('kontak');
     }
+
+    public function profile()
+    {
+        if (Auth::check() && Auth::user()->level == 'Masyarakat') {
+            $userData = User::where('id', Auth::user()->id)->first();
+            return view('profile', compact('userData'));
+        } else if (Auth::check() && Auth::user()->level == 'Admin' || Auth::user()->level == 'Petugas') {
+            return redirect()->route('admin.dashboard');
+        } else {
+            return redirect()->route('login');
+        }
+    }
+
+    public function editProfile()
+    {
+        if (Auth::check() && Auth::user()->level == 'Masyarakat') {
+            $userData = User::where('id', Auth::user()->id)->first();
+            return view('edit-profile', compact('userData'));
+        } else if (Auth::check() && Auth::user()->level == 'Admin' || Auth::user()->level == 'Petugas') {
+            return redirect()->route('admin.dashboard');
+        } else {
+            return redirect()->route('login');
+        }
+    }
+
+    public function storeProfile(Request $request)
+    {
+        $user = User::find(Auth::user()->id);
+        $user->name = $request->nama;
+        $user->username = $request->username;
+        $user->password = Hash::make($request->password);
+        $user->telephone = $request->telepon;
+        $user->save();
+        return redirect()->route('profile')->with('success', 'Profile berhasil diubah');
+    }
+    
 
 }
