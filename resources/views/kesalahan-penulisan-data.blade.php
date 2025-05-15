@@ -278,41 +278,41 @@
 <body>
 
     <header>
-        <img src="image/logo.png" alt="Logo Desa">
+        <img src="{{ asset('images/logo.png') }}" alt="Logo Desa">
         <strong>DESA TUNDAGAN</strong>
         <nav>
-            <a href="home2.php">HOME</a>
+            <a href="{{ route('home') }}">HOME</a>
             <div class="dropdown">
-                <a href="home2.php">PENGADUAN</a>
+                <a href="#">PENGADUAN</a>
                 <div class="dropdown-content">
-                    <a href="pengaduan_bansos.php">Pengaduan Bantuan Sosial</a>
-                    <a href="pengaduan_lingkungan.php">Pengaduan Lingkungan</a>
+                    <a href="{{ route('pengaduan-bantuan-sosial') }}">Pengaduan Bantuan Sosial</a>
+                    <a href="{{ route('pengaduan-lingkungan') }}">Pengaduan Lingkungan</a>
                     <div class="dropdown-sub">
-                        <a href="home2.php">Pengaduan Administratif</a>
+                        <a href="#">Pengaduan Administratif</a>
                         <div class="dropdown-sub-content">
-                            <a href="kesalahan_penulisan_data.php">Kesalahan Penulisan Data Pribadi</a>
-                            <a href="permasalahan_dokumen.php">Permasalahan Dokumen</a>
-                            <a href="keterlambatan_proses.php">Keterlambatan Proses Administratif</a>
-                            <a href="pelayanan_tidak_sesuai.php">Pelayanan Tidak Sesuai Prosedur</a>
+                            <a href="{{ route('kesalahan-penulisan-data') }}">Kesalahan Penulisan Data Pribadi</a>
+                            <a href="{{ route('permasalahan-dokumen') }}">Permasalahan Dokumen</a>
+                            <a href="{{ route('keterlambatan-proses') }}">Keterlambatan Proses Administratif</a>
+                            <a href="{{ route('pelayanan-tidak-sesuai') }}">Pelayanan Tidak Sesuai Prosedur</a>
                         </div>
                     </div>
-                    <a href="pengaduan_keamanan.php">Pengaduan Keamanan dan Ketertiban</a>
+                    <a href="{{ route('pengaduan-keamanan') }}">Pengaduan Keamanan dan Ketertiban</a>
                 </div>
             </div>
-            <a href="status_pengaduan.php">STATUS PENGADUAN</a>
+            <a href="#">STATUS PENGADUAN</a>
             <div class="dropdown">
-                <a href="home2.php">PROFIL DESA</a>
+                <a href="#">PROFIL DESA</a>
                 <div class="dropdown-content">
-                    <a href="sejarah_desa.php">Sejarah</a>
-                    <a href="struktur_organisasi.php">Struktur Organisasi</a>
-                    <a href="visi_misi.php">Visi dan Misi</a>
-                    <a href="lokasi.php">Lokasi</a>
-                    <a href="kontak.php">Kontak</a>
+                    <a href="#">Sejarah</a>
+                    <a href="#">Struktur Organisasi</a>
+                    <a href="#">Visi dan Misi</a>
+                    <a href="#">Lokasi</a>
+                    <a href="#">Kontak</a>
                 </div>
             </div>
             <div class="user-info">
-                <a href="{{ Auth::check() ? route('logout') : route('login') }}">{{ Auth::check() ? '👨🏻‍💼 ' . Auth::user()->name : 'Login' }}</a>
-                <a href="{{ Auth::check() ? route('logout') : route('registration') }}">{{ Auth::check() ? 'LOGOUT' : 'Register' }}</a>
+                <a href="#">👨🏻‍💼 {{ Auth::user()->name }}</a>
+                <a href="{{ route('logout') }}">LOGOUT</a>
             </div>
         </nav>
     </header>
@@ -357,7 +357,7 @@
 
     <footer>
         <div style="display: flex; align-items: center; gap: 15px;">
-            <img src="image/logo.png" alt="Logo Desa">
+            <img src="{{ asset('images/logo.png') }}" alt="Logo Desa">
             <div>
                 <h3>Desa Tundagan</h3>
                 Kecamatan Watukumpul<br>
@@ -368,10 +368,10 @@
 
         <div>
             <h3>Navigasi</h3>
-            <a href="home2.php">Home</a>
-            <a href="home2.php">Pengaduan</a>
-            <a href="status_pengaduan.php">Status Pengaduan</a>
-            <a href="home2.php">Profil Desa</a>
+            <a href="{{ route('home') }}">Home</a>
+            <a href="#">Pengaduan</a>
+            <a href="#">Status Pengaduan</a>
+            <a href="#">Profil Desa</a>
         </div>
 
         <div>

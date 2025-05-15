@@ -295,9 +295,9 @@
         <div>
             <h3>Navigasi</h3>
             <a href="{{ route('home') }}">Home</a>
-            <a href="home1.php">Pengaduan</a>
-            <a href="home1.php">Status Pengaduan</a>
-            <a href="home1.php">Profil Desa</a>
+            <a href="#">Pengaduan</a>
+            <a href="#">Status Pengaduan</a>
+            <a href="#">Profil Desa</a>
         </div>
 
         <div>
