@@ -265,24 +265,24 @@
 
         <div class="form-group">
             <label>Judul Laporan</label>
-            <input type="text" value="pengaduan keamanan dan ketertiban" readonly>
+            <input type="text" value="{{ $pengaduan->judul }}" readonly>
         </div>
 
         <div class="form-group">
             <label>Isi Laporan</label>
-            <input type="text" value="kehilangan motor" readonly>
+            <input type="text" value="{{ $pengaduan->laporan }}" readonly>
         </div>
 
         <div class="form-group">
             <label>Foto</label>
             <div class="foto-container">
-                <img src="image/motor.jpeg" alt="Foto Laporan">
+                <img src="{{ $pengaduan->foto }}" alt="Foto Laporan">
             </div>
         </div>
 
         <div class="form-group">
             <label>Tanggapan</label>
-            <input type="text" value="baik akan kami proses" readonly>
+            <input type="text" value="{{ $pengaduan->tanggapanDetail->tanggapan ?? 'Belum ada tanggapan' }}" readonly>
         </div>
     </div>
 
