@@ -80,7 +80,6 @@ class MasyarakatController extends Controller
 
     public function storeKesalahanPenulisanData(Request $request)
     {
-        // dd($request->all());
         Pengaduan::create([
             'tanggal' => Carbon::now(),
             'nama' => $request->nama,
@@ -94,4 +93,33 @@ class MasyarakatController extends Controller
         ]);
         return redirect()->route('kesalahan-penulisan-data')->with('success', 'Pengaduan berhasil dikirim!');
     }
+
+    public function permasalahanDokumen()
+    {
+        if (Auth::check() && Auth::user()->level == 'Masyarakat') {
+            return view('permasalahan-dokumen');
+        } else if (Auth::check() && Auth::user()->level == 'Admin' || Auth::user()->level == 'Petugas') {
+            return redirect()->route('admin.dashboard');
+        } else {
+            return redirect()->route('login');
+        }
+    }
+
+    public function storePermasalahanDokumen(Request $request)
+    {
+        Pengaduan::create([
+            'tanggal' => Carbon::now(),
+            'nama' => $request->nama,
+            'nik' => $request->nik,
+            'alamat' => $request->alamat,
+            'no_hp' => $request->no_hp,
+            'email' => $request->email,
+            'judul' => $request->judul,
+            'laporan' => $request->laporan,
+            'status' => 'Diproses',
+        ]);
+        return redirect()->route('permasalahan-dokumen')->with('success', 'Pengaduan berhasil dikirim!');
+    }
+    
+    
 }

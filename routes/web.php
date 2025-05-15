@@ -51,4 +51,7 @@ Route::middleware('auth')->group(function () {
 
     Route::get('/kesalahan-penulisan-data', [MasyarakatController::class, 'kesalahanPenulisanData'])->name('kesalahan-penulisan-data');
     Route::post('/kesalahan-penulisan-data', [MasyarakatController::class, 'storeKesalahanPenulisanData'])->name('kesalahan-penulisan-data.store');
+
+    Route::get('/permasalahan-dokumen', [MasyarakatController::class, 'permasalahanDokumen'])->name('permasalahan-dokumen');
+    Route::post('/permasalahan-dokumen', [MasyarakatController::class, 'storePermasalahanDokumen'])->name('permasalahan-dokumen.store');
 });
