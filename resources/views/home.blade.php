@@ -224,7 +224,7 @@
                 <a href="#">PENGADUAN</a>
                 <div class="dropdown-content">
                     <a href="{{ route('pengaduan-bantuan-sosial') }}">Pengaduan Bantuan Sosial</a>
-                    <a href="">Pengaduan Lingkungan</a>
+                    <a href="{{ route('pengaduan-lingkungan') }}">Pengaduan Lingkungan</a>
 
                     <div class="dropdown-sub">
                         <a href="#">Pengaduan Administratif</a>

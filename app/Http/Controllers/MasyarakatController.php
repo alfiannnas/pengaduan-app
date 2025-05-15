@@ -16,12 +16,15 @@ class MasyarakatController extends Controller
 
     public function pengaduanBantuanSosial()
     {
-        if (Auth::check()) {
+        if (Auth::check() && Auth::user()->level == 'Masyarakat') {
             return view('pengaduan-bantuan-sosial');
+        } else if (Auth::check() && Auth::user()->level == 'Admin' || Auth::user()->level == 'Petugas') {
+            return redirect()->route('admin.dashboard');
         } else {
             return redirect()->route('login');
         }
     }
+
     public function storePengaduanBantuanSosial(Request $request)
     {
         Pengaduan::create([
@@ -36,5 +39,31 @@ class MasyarakatController extends Controller
 
         ]);
         return redirect()->route('pengaduan-bantuan-sosial')->with('success', 'Pengaduan berhasil dikirim!');
+    }
+
+    public function pengaduanLingkungan()
+    {
+        if (Auth::check() && Auth::user()->level == 'Masyarakat') {
+            return view('pengaduan-lingkungan');
+        } else if (Auth::check() && Auth::user()->level == 'Admin' || Auth::user()->level == 'Petugas') {
+            return redirect()->route('admin.dashboard');
+        } else {
+            return redirect()->route('login');
+        }
+    }
+
+    public function storePengaduanLingkungan(Request $request)
+    {
+        Pengaduan::create([
+            'tanggal' => Carbon::now(),
+            'nama' => Auth::user()->name,
+            'nik' => Auth::user()->nik,
+            'alamat' => $request->alamat,
+            'no_hp' => Auth::user()->telephone,
+            'judul' => $request->judul,
+            'laporan' => $request->laporan,
+            'status' => 'Diproses',
+        ]);
+        return redirect()->route('pengaduan-lingkungan')->with('success', 'Pengaduan berhasil dikirim!');
     }
 }

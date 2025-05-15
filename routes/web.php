@@ -45,4 +45,7 @@ Route::get('/home', [MasyarakatController::class, 'home'])->name('home');
 Route::middleware('auth')->group(function () {
     Route::get('/pengaduan-bantuan-sosial', [MasyarakatController::class, 'pengaduanBantuanSosial'])->name('pengaduan-bantuan-sosial');
     Route::post('/pengaduan-bantuan-sosial', [MasyarakatController::class, 'storePengaduanBantuanSosial'])->name('pengaduan-bantuan-sosial.store');
+
+    Route::get('/pengaduan-lingkungan', [MasyarakatController::class, 'pengaduanLingkungan'])->name('pengaduan-lingkungan');
+    Route::post('/pengaduan-lingkungan', [MasyarakatController::class, 'storePengaduanLingkungan'])->name('pengaduan-lingkungan.store');
 });

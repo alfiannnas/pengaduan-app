@@ -1,11 +1,10 @@
 
-
 <!DOCTYPE html>
 <html lang="id">
 
 <head>
     <meta charset="UTF-8">
-    <title>Formulir Pengaduan Bantuan Sosial</title>
+    <title>Formulir Pengaduan Lingkungan</title>
     <style>
         * {
             margin: 0;
@@ -21,6 +20,7 @@
             flex-direction: column;
         }
 
+        /* Navbar */
         header {
             background-color: #A30303;
             display: flex;
@@ -103,6 +103,7 @@
             font-weight: bold;
         }
 
+        /* Formulir */
         .form-container {
             background: white;
             margin: 30px auto;
@@ -181,6 +182,7 @@
             background-color: #218838;
         }
 
+        /* Popup */
         .popup {
             position: fixed;
             top: 0;
@@ -208,6 +210,7 @@
             border-radius: 10px;
             text-align: center;
             box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            position: relative;
         }
 
         .popup-content img {
@@ -221,6 +224,7 @@
             margin-bottom: 10px;
         }
 
+        /* Footer */
         footer {
             background-color: #A30303;
             color: white;
@@ -258,6 +262,7 @@
             padding: 10px;
             font-size: 14px;
         }
+
         .message {
             background-color: #fff3cd;
             color: #856404;
@@ -276,29 +281,33 @@
 
 <body>
 
+    <!-- Navbar -->
     <header>
         <img src="{{ asset('images/logo.png') }}" alt="Logo Desa">
         <strong>DESA TUNDAGAN</strong>
         <nav>
             <a href="{{ route('home') }}">HOME</a>
+
             <div class="dropdown">
-                <a href="{{ route('pengaduan-bantuan-sosial') }}">PENGADUAN</a>
+                <a href="home2.php">PENGADUAN</a>
                 <div class="dropdown-content">
                     <a href="{{ route('pengaduan-bantuan-sosial') }}">Pengaduan Bantuan Sosial</a>
                     <a href="{{ route('pengaduan-lingkungan') }}">Pengaduan Lingkungan</a>
                     <div class="dropdown-sub">
                         <a href="home2.php">Pengaduan Administratif</a>
                         <div class="dropdown-sub-content">
-                            <a href="kesalahan_penulisan_data.php">Kesalahan Penulisan Data</a>
+                            <a href="kesalahan_penulisan_data.php">Kesalahan Penulisan Data Pribadi</a>
                             <a href="permasalahan_dokumen.php">Permasalahan Dokumen</a>
-                            <a href="keterlambatan_proses.php">Keterlambatan Proses</a>
-                            <a href="pelayanan_tidak_sesuai.php">Pelayanan Tidak Sesuai</a>
+                            <a href="keterlambatan_proses.php">Keterlambatan Proses Administratif</a>
+                            <a href="pelayanan_tidak_sesuai.php">Pelayanan Tidak Sesuai Prosedur</a>
                         </div>
                     </div>
                     <a href="pengaduan_keamanan.php">Pengaduan Keamanan dan Ketertiban</a>
                 </div>
             </div>
+
             <a href="status_pengaduan.php">STATUS PENGADUAN</a>
+
             <div class="dropdown">
                 <a href="home2.php">PROFIL DESA</a>
                 <div class="dropdown-content">
@@ -309,6 +318,7 @@
                     <a href="kontak.php">Kontak</a>
                 </div>
             </div>
+
             <div class="user-info">
                 <a href="profile.php">👨🏻‍💼 {{ Auth::user()->name }}</a>
                 <a href="{{ route('logout') }}">LOGOUT</a>
@@ -316,43 +326,45 @@
         </nav>
     </header>
 
-
+    <!-- Formulir -->
     <div class="form-container">
-    @if($message = session('error'))
+        @if($message = session('error'))
             <div class="error">{{ $message }}</div>
         @elseif($message = session('success'))
             <div class="message">{{ $message }}</div>
         @endif
         <div class="form-header">
-            <h2>FORMULIR PENGADUAN BANTUAN SOSIAL</h2>
+            <h2>FORMULIR PENGADUAN LINGKUNGAN</h2>
             <button onclick="window.history.back()">X</button>
         </div>
 
-        <form method="POST" enctype="multipart/form-data" id="formPengaduan" action="{{ route('pengaduan-bantuan-sosial.store') }}">
+        <form action="{{ route('pengaduan-lingkungan.store') }}" method="POST" enctype="multipart/form-data">
             @csrf
             <label for="judul">Judul Laporan</label>
-            <input type="text" id="judul" name="judul" placeholder="Contoh: Bantuan Sembako Tidak Merata" required>
+            <input type="text" id="judul" name="judul" placeholder="Contoh: Sampah menumpuk" required>
 
-            <label for="laporan">Laporan</label>
-            <textarea id="laporan" name="laporan" placeholder="Jelaskan masalah terkait bantuan sosial..." required></textarea>
+            <label for="laporan">Isi Laporan</label>
+            <input type="text" id="laporan" name="laporan" placeholder="Contoh: Sampah banyak di sungai" required>
 
             <label for="alamat">Alamat Lokasi</label>
-            <input type="text" id="alamat" name="alamat" placeholder="Contoh: RT 05 RW 02 Desa Tundagan" required>
+            <input type="text" id="alamat" name="alamat" placeholder="Contoh: RT 04 RW 03, Dekat Sungai" required>
 
-            <label for="foto">Foto Bukti (Opsional)</label>
+            <label for="foto">Foto Bukti</label>
             <input type="file" id="foto" name="foto" accept="image/*">
 
-            <button type="submit" class="btn-kirim">KIRIM</button>
+            <button type="submit" class="btn-kirim">Kirim</button>
         </form>
     </div>
 
-    <div class="popup" id="popupSuccess">
+    <!-- Popup -->
+    <div class="popup" id="popupSukses">
         <div class="popup-content">
-            <img src="image/centang.png" alt="Berhasil">
-            <h2>Data Berhasil Dikirim!</h2>
+            <img src="https://cdn-icons-png.flaticon.com/512/190/190411.png" alt="Centang">
+            <h2>DATA BERHASIL TERKIRIM</h2>
         </div>
     </div>
 
+    <!-- Footer -->
     <footer>
         <div style="display: flex; align-items: center; gap: 15px;">
             <img src="{{ asset('images/logo.png') }}" alt="Logo Desa">
@@ -363,13 +375,15 @@
                 Provinsi Jawa Tengah
             </div>
         </div>
+
         <div>
             <h3>Navigasi</h3>
-            <a href="home2.php">Home</a>
-            <a href="home2.php">Pengaduan</a>
+            <a href="{{ route('home') }}">Home</a>
+            <a href="{{ route('pengaduan-bantuan-sosial') }}">Pengaduan</a>
             <a href="status_pengaduan.php">Status Pengaduan</a>
             <a href="home2.php">Profil Desa</a>
         </div>
+
         <div>
             <h3>Kontak Desa</h3>
             📞 0831-5953-5131<br>
@@ -382,6 +396,15 @@
     <div class="copyright">
         Copyright © 2025 All rights reserved | Fajar Arif Yanto
     </div>
+
+    <?php if (isset($success) && $success): ?>
+        <script>
+            document.getElementById('popupSukses').classList.add('show');
+            setTimeout(function() {
+                document.getElementById('popupSukses').classList.remove('show');
+            }, 3000);
+        </script>
+    <?php endif; ?>
 
 </body>
 
