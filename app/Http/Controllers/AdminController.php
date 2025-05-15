@@ -38,7 +38,9 @@ class AdminController extends Controller
 
     public function exportTanggapan(Request $request)
     {
-        $tanggapan = Tanggapan::with('pengaduan')->get();
+        $tanggapan = Tanggapan::with('pengaduan')
+            ->whereHas('pengaduan')
+            ->get();
 
         return Excel::download(
             new class($tanggapan) implements
