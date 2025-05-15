@@ -18,17 +18,19 @@ class AuthController extends Controller
     {
         if (!empty($request->username) && !empty($request->password)) {
             $user = User::where('username', $request->username)->first();
-            if ($user->level == 'Admin' || $user->level == 'Petugas') {
-                if (Hash::check($request->password, $user->password)) {
-                    Auth::login($user);
+            if ($user) {
+                if ($user->level == 'Admin' || $user->level == 'Petugas') {
+                    if (Hash::check($request->password, $user->password)) {
+                        Auth::login($user);
 
-                    return redirect()->intended(route('admin.dashboard'));
+                        return redirect()->intended(route('admin.dashboard'));
+                    }
                 }
-            }
-            if ($user->level == 'Masyarakat') {
-                if (Hash::check($request->password, $user->password)) {
-                    Auth::login($user);
-                    return redirect()->intended(route('home'));
+                if ($user->level == 'Masyarakat') {
+                    if (Hash::check($request->password, $user->password)) {
+                        Auth::login($user);
+                        return redirect()->intended(route('home'));
+                    }
                 }
             }
             return back()->with('error', 'Username atau password salah!');
