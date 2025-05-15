@@ -54,4 +54,7 @@ Route::middleware('auth')->group(function () {
 
     Route::get('/permasalahan-dokumen', [MasyarakatController::class, 'permasalahanDokumen'])->name('permasalahan-dokumen');
     Route::post('/permasalahan-dokumen', [MasyarakatController::class, 'storePermasalahanDokumen'])->name('permasalahan-dokumen.store');
+
+    Route::get('/keterlambatan-proses', [MasyarakatController::class, 'keterlambatanProses'])->name('keterlambatan-proses');
+    Route::post('/keterlambatan-proses', [MasyarakatController::class, 'storeKeterlambatanProses'])->name('keterlambatan-proses.store');
 });

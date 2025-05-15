@@ -120,6 +120,31 @@ class MasyarakatController extends Controller
         ]);
         return redirect()->route('permasalahan-dokumen')->with('success', 'Pengaduan berhasil dikirim!');
     }
-    
-    
+
+    public function keterlambatanProses()
+    {
+        if (Auth::check() && Auth::user()->level == 'Masyarakat') {
+            return view('keterlambatan-proses');
+        } else if (Auth::check() && Auth::user()->level == 'Admin' || Auth::user()->level == 'Petugas') {
+            return redirect()->route('admin.dashboard');
+        } else {
+            return redirect()->route('login');
+        }
+    }
+
+    public function storeKeterlambatanProses(Request $request)
+    {
+        Pengaduan::create([
+            'tanggal' => Carbon::now(),
+            'nama' => $request->nama,
+            'nik' => $request->nik,
+            'alamat' => $request->alamat,
+            'no_hp' => $request->no_hp,
+            'email' => $request->email,
+            'judul' => $request->judul,
+            'laporan' => $request->laporan,
+            'status' => 'Diproses',
+        ]);
+        return redirect()->route('keterlambatan-proses')->with('success', 'Pengaduan berhasil dikirim!');
+    }
 }
