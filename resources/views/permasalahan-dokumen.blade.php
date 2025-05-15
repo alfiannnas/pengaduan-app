@@ -285,12 +285,12 @@
         <nav>
             <a href="{{ route('home') }}">HOME</a>
             <div class="dropdown">
-                <a href="?page=form">PENGADUAN</a>
+                <a href="#">PENGADUAN</a>
                 <div class="dropdown-content">
                     <a href="{{ route('pengaduan-bantuan-sosial') }}">Pengaduan Bantuan Sosial</a>
                     <a href="{{ route('pengaduan-lingkungan') }}">Pengaduan Lingkungan</a>
                     <div class="dropdown-sub">
-                        <a href="?page=form">Pengaduan Administratif</a>
+                        <a href="#">Pengaduan Administratif</a>
                         <div class="dropdown-sub-content">
                             <a href="{{ route('kesalahan-penulisan-data') }}">Kesalahan Penulisan Data Pribadi</a>
                             <a href="{{ route('permasalahan-dokumen') }}">Permasalahan Dokumen</a>
@@ -301,19 +301,19 @@
                     <a href="{{ route('pengaduan-keamanan') }}">Pengaduan Keamanan dan Ketertiban</a>
                 </div>
             </div>
-            <a href="#">STATUS PENGADUAN</a>
+            <a href="{{ route('status-pengaduan') }}">STATUS PENGADUAN</a>
             <div class="dropdown">
                 <a href="#">PROFIL DESA</a>
                 <div class="dropdown-content">
-                    <a href="#">Sejarah</a>
-                    <a href="#">Struktur Organisasi</a>
-                    <a href="#">Visi dan Misi</a>
-                    <a href="#">Lokasi</a>
-                    <a href="#">Kontak</a>
+                    <a href="{{ route('sejarah-desa') }}">Sejarah</a>
+                    <a href="{{ route('struktur-organisasi') }}">Struktur Organisasi</a>
+                    <a href="{{ route('visi-misi') }}">Visi dan Misi</a>
+                    <a href="{{ route('lokasi') }}">Lokasi</a>
+                    <a href="{{ route('kontak') }}">Kontak</a>
                 </div>
             </div>
             <div class="user-info">
-                <a href="#">👨🏻‍💼 {{ Auth::user()->name }}</a>
+                <a href="{{ route('profile') }}">👨🏻‍💼 {{ Auth::user()->name }}</a>
                 <a href="{{ route('logout') }}">LOGOUT</a>
             </div>
         </nav>
@@ -372,9 +372,9 @@
         <div>
             <h3>Navigasi</h3>
             <a href="{{ route('home') }}">Home</a>
-            <a href="{{ route('pengaduan-bantuan-sosial') }}">Pengaduan</a>
-            <a href="#">Status Pengaduan</a>
-            <a href="#">Profil Desa</a>
+            <a href="{{ route('home') }}">Pengaduan</a>
+            <a href="{{ route('status-pengaduan') }}">Status Pengaduan</a>
+            <a href="{{ route('home') }}">Profil Desa</a>
         </div>
 
         <div>

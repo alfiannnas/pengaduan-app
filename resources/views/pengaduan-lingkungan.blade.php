@@ -295,21 +295,21 @@
                 </div>
             </div>
 
-            <a href="#">STATUS PENGADUAN</a>
+            <a href="{{ route('status-pengaduan') }}">STATUS PENGADUAN</a>
 
             <div class="dropdown">
                 <a href="#">PROFIL DESA</a>
                 <div class="dropdown-content">
-                    <a href="#">Sejarah</a>
-                    <a href="#">Struktur Organisasi</a>
-                    <a href="#">Visi dan Misi</a>
-                    <a href="#">Lokasi</a>
-                    <a href="#">Kontak</a>
+                    <a href="{{ route('sejarah-desa') }}">Sejarah</a>
+                    <a href="{{ route('struktur-organisasi') }}">Struktur Organisasi</a>
+                    <a href="{{ route('visi-misi') }}">Visi dan Misi</a>
+                    <a href="{{ route('lokasi') }}">Lokasi</a>
+                    <a href="{{ route('kontak') }}">Kontak</a>
                 </div>
             </div>
 
             <div class="user-info">
-                <a href="#">👨🏻‍💼 {{ Auth::user()->name }}</a>
+                <a href="{{ route('profile') }}">👨🏻‍💼 {{ Auth::user()->name }}</a>
                 <a href="{{ route('logout') }}">LOGOUT</a>
             </div>
         </nav>
@@ -361,11 +361,10 @@
         </div>
 
         <div>
-            <h3>Navigasi</h3>
             <a href="{{ route('home') }}">Home</a>
-            <a href="#">Pengaduan</a>
-            <a href="#">Status Pengaduan</a>
-            <a href="#">Profil Desa</a>
+            <a href="{{ route('home') }}">Pengaduan</a>
+            <a href="{{ route('status-pengaduan') }}">Status Pengaduan</a>
+            <a href="{{ route('home') }}">Profil Desa</a>
         </div>
 
         <div>

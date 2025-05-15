@@ -240,7 +240,7 @@
                 </div>
             </div>
             <div class="user-info">
-                <a href="{{ Auth::check() ? route('logout') : route('login') }}">{{ Auth::check() ? '👨🏻‍💼 ' . Auth::user()->name : 'Login' }}</a>
+                <a href="{{ Auth::check() ? route('profile') : route('login') }}">{{ Auth::check() ? '👨🏻‍💼 ' . Auth::user()->name : 'Login' }}</a>
                 <a href="{{ Auth::check() ? route('logout') : route('registration') }}">{{ Auth::check() ? 'LOGOUT' : 'Register' }}</a>
             </div>
         </nav>
@@ -283,9 +283,9 @@
         <div>
             <h3>Navigasi</h3>
             <a href="{{ route('home') }}">Home</a>
-            <a href="#">Pengaduan</a>
+            <a href="{{ route('home') }}">Pengaduan</a>
             <a href="{{ route('status-pengaduan') }}">Status Pengaduan</a>
-            <a href="#">Profil Desa</a>
+            <a href="{{ route('home') }}">Profil Desa</a>
         </div>
 
         <div>
