@@ -230,26 +230,26 @@
                         <a href="#">Pengaduan Administratif</a>
                         <div class="dropdown-sub-content">
                             <a href="{{ route('kesalahan-penulisan-data') }}">Kesalahan Penulisan Data Pribadi</a>
-                            <a href="">Permasalahan Dokumen</a>
-                            <a href="">Keterlambatan Proses Administratif</a>
-                            <a href="">Pelayanan Tidak Sesuai Prosedur</a>
+                            <a href="{{ route('permasalahan-dokumen') }}">Permasalahan Dokumen</a>
+                            <a href="{{ route('keterlambatan-proses') }}">Keterlambatan Proses Administratif</a>
+                            <a href="{{ route('pelayanan-tidak-sesuai') }}">Pelayanan Tidak Sesuai Prosedur</a>
                         </div>
                     </div>
 
-                    <a href="">Pengaduan Keamanan dan Ketertiban</a>
+                    <a href="{{ route('pengaduan-keamanan') }}">Pengaduan Keamanan dan Ketertiban</a>
                 </div>
             </div>
 
-            <a href="#">STATUS PENGADUAN</a>
+            <a href="{{ route('status-pengaduan') }}">STATUS PENGADUAN</a>
 
             <div class="dropdown">
-                <a href="#">PROFIL DESA</a>
+                <a href="{{ route('home') }}">PROFIL DESA</a>
                 <div class="dropdown-content">
-                    <a href="">Sejarah</a>
-                    <a href="#">Struktur Organisasi</a>
-                    <a href="#">Visi dan Misi</a>
-                    <a href="#">Lokasi</a>
-                    <a href="#">Kontak</a>
+                    <a href="{{ route('sejarah-desa') }}">Sejarah</a>
+                    <a href="{{ route('struktur-organisasi') }}">Struktur Organisasi</a>
+                    <a href="{{ route('visi-misi') }}">Visi dan Misi</a>
+                    <a href="{{ route('lokasi') }}">Lokasi</a>
+                    <a href="{{ route('kontak') }}">Kontak</a>
                 </div>
             </div>
             <div class="user-info">
@@ -295,9 +295,9 @@
         <div>
             <h3>Navigasi</h3>
             <a href="{{ route('home') }}">Home</a>
-            <a href="#">Pengaduan</a>
-            <a href="#">Status Pengaduan</a>
-            <a href="#">Profil Desa</a>
+            <a href="{{ route('pengaduan-bantuan-sosial') }}">Pengaduan</a>
+            <a href="{{ route('status-pengaduan') }}">Status Pengaduan</a>
+            <a href="{{ route('home') }}">Profil Desa</a>
         </div>
 
         <div>

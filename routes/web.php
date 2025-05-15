@@ -41,6 +41,11 @@ Route::prefix('admin')->middleware('auth')->group(function () {
 });
 
 Route::get('/home', [MasyarakatController::class, 'home'])->name('home');
+Route::get('/sejarah-desa', [MasyarakatController::class, 'sejarahDesa'])->name('sejarah-desa');
+Route::get('/struktur-organisasi', [MasyarakatController::class, 'strukturOrganisasi'])->name('struktur-organisasi');
+Route::get('/visi-misi', [MasyarakatController::class, 'visiMisi'])->name('visi-misi');
+Route::get('/lokasi', [MasyarakatController::class, 'lokasi'])->name('lokasi');
+Route::get('/kontak', [MasyarakatController::class, 'kontak'])->name('kontak');
 
 Route::middleware('auth')->group(function () {
     Route::get('/pengaduan-bantuan-sosial', [MasyarakatController::class, 'pengaduanBantuanSosial'])->name('pengaduan-bantuan-sosial');
@@ -67,12 +72,6 @@ Route::middleware('auth')->group(function () {
     Route::get('/status-pengaduan', [MasyarakatController::class, 'statusPengaduan'])->name('status-pengaduan');
     Route::delete('/status-pengaduan/{id}', [MasyarakatController::class, 'deletePengaduan'])->name('status-pengaduan.delete');
     Route::get('/status-pengaduan/{id}', [MasyarakatController::class, 'statusPengaduanDetail'])->name('status-pengaduan.detail');
-
-    Route::get('/sejarah-desa', [MasyarakatController::class, 'sejarahDesa'])->name('sejarah-desa');
-    Route::get('/struktur-organisasi', [MasyarakatController::class, 'strukturOrganisasi'])->name('struktur-organisasi');
-    Route::get('/visi-misi', [MasyarakatController::class, 'visiMisi'])->name('visi-misi');
-    Route::get('/lokasi', [MasyarakatController::class, 'lokasi'])->name('lokasi');
-    Route::get('/kontak', [MasyarakatController::class, 'kontak'])->name('kontak');
 
     Route::get('/profile', [MasyarakatController::class, 'profile'])->name('profile');
     Route::get('/edit-profile', [MasyarakatController::class, 'editProfile'])->name('edit-profile');
