@@ -253,8 +253,8 @@
                 </div>
             </div>
             <div class="user-info">
-                <a href="{{ Auth::check() ? route('logout') : route('login') }}">{{ Auth::check() ? '👨🏻‍💼' . Auth::user()->name : 'Login' }}</a>
-                <a href="{{ Auth::check() ? route('logout') : route('registration') }}">{{ Auth::check() ? 'Logout' : 'Register' }}</a>
+                <a href="{{ Auth::check() ? route('logout') : route('login') }}">{{ Auth::check() ? '👨🏻‍💼 ' . Auth::user()->name : 'Login' }}</a>
+                <a href="{{ Auth::check() ? route('logout') : route('registration') }}">{{ Auth::check() ? 'LOGOUT' : 'Register' }}</a>
             </div>
         </nav>
     </header>
