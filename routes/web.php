@@ -57,4 +57,7 @@ Route::middleware('auth')->group(function () {
 
     Route::get('/keterlambatan-proses', [MasyarakatController::class, 'keterlambatanProses'])->name('keterlambatan-proses');
     Route::post('/keterlambatan-proses', [MasyarakatController::class, 'storeKeterlambatanProses'])->name('keterlambatan-proses.store');
+
+    Route::get('/pelayanan-tidak-sesuai', [MasyarakatController::class, 'pelayananTidakSesuai'])->name('pelayanan-tidak-sesuai');
+    Route::post('/pelayanan-tidak-sesuai', [MasyarakatController::class, 'storePelayananTidakSesuai'])->name('pelayanan-tidak-sesuai.store');
 });

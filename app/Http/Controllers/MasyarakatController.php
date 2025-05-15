@@ -147,4 +147,31 @@ class MasyarakatController extends Controller
         ]);
         return redirect()->route('keterlambatan-proses')->with('success', 'Pengaduan berhasil dikirim!');
     }
+
+    public function pelayananTidakSesuai()
+    {
+        if (Auth::check() && Auth::user()->level == 'Masyarakat') {
+            return view('pelayanan-tidak-sesuai');
+        } else if (Auth::check() && Auth::user()->level == 'Admin' || Auth::user()->level == 'Petugas') {
+            return redirect()->route('admin.dashboard');
+        } else {
+            return redirect()->route('login');
+        }
+    }
+
+    public function storePelayananTidakSesuai(Request $request)
+    {
+        Pengaduan::create([
+            'tanggal' => Carbon::now(),
+            'nama' => $request->nama,
+            'nik' => $request->nik,
+            'alamat' => $request->alamat,
+            'no_hp' => $request->no_hp,
+            'email' => $request->email,
+            'judul' => $request->judul,
+            'laporan' => $request->laporan,
+            'status' => 'Diproses',
+        ]);
+        return redirect()->route('pelayanan-tidak-sesuai')->with('success', 'Pengaduan berhasil dikirim!');
+    }
 }
