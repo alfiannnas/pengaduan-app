@@ -246,7 +246,7 @@
     <div class="sidebar">
         <div class="profile">
             <img src="https://cdn-icons-png.flaticon.com/512/847/847969.png" alt="Profile Admin">
-            <h2>Admin</h2>
+            <h2>{{ Auth::user()->name }}</h2>
         </div>
         <hr>
         <a href="{{ route('admin.dashboard') }}"><span>🏠</span> Dashboard</a>
