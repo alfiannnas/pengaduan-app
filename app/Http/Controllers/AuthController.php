@@ -16,19 +16,19 @@ class AuthController extends Controller
 
     public function login(Request $request)
     {
-        if(!empty($request->username) && !empty($request->password)) {
+        if (!empty($request->username) && !empty($request->password)) {
             $user = User::where('username', $request->username)->first();
-            if($user->level == 'Admin' || $user->level == 'Petugas') {
-                if(Hash::check($request->password, $user->password)) {
+            if ($user->level == 'Admin' || $user->level == 'Petugas') {
+                if (Hash::check($request->password, $user->password)) {
                     Auth::login($user);
-     
+
                     return redirect()->intended(route('admin.dashboard'));
                 }
             }
-            if($user->level == 'Masyarakat') {
-                if(Hash::check($request->password, $user->password)) {
+            if ($user->level == 'Masyarakat') {
+                if (Hash::check($request->password, $user->password)) {
                     Auth::login($user);
-                    return redirect()->intended(route('masyarakat.home'));
+                    return redirect()->intended(route('home'));
                 }
             }
             return back()->with('error', 'Username atau password salah!');
@@ -62,7 +62,7 @@ class AuthController extends Controller
         return redirect()->route('login')->with('success', 'Registrasi berhasil! Silakan login.');
     }
 
-    public function logout ()
+    public function logout()
     {
         Auth::logout();
         return redirect()->route('login');
