@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\MasyarakatController;
 
 // Login
 Route::get('/login', [AuthController::class, 'showLoginForm'])->name('login');
@@ -37,4 +38,8 @@ Route::prefix('admin')->middleware('auth')->group(function () {
     Route::post('/verifikasi-pengaduan', [AdminController::class, 'verifikasiPengaduan'])->name('admin.verifikasi-pengaduan');
     Route::post('/tanggapi-pengaduan', [AdminController::class, 'tanggapiPengaduan'])->name('admin.tanggapi-pengaduan');
     Route::get('/profil-desa', [AdminController::class, 'profilDesa'])->name('admin.profil-desa');
+});
+
+Route::prefix('masyarakat')->middleware('auth')->group(function () {
+    Route::get('/home', [MasyarakatController::class, 'home'])->name('masyarakat.home');
 });
