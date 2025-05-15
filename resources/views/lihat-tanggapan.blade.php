@@ -3,9 +3,8 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>Status Pengaduan</title>
+    <title>Lihat Tanggapan</title>
     <style>
-        /* --- Style nya tetap sama kayak sebelumnya --- */
         * {
             margin: 0;
             padding: 0;
@@ -41,6 +40,7 @@
             display: flex;
             gap: 20px;
             align-items: center;
+            position: relative;
         }
 
         nav a {
@@ -102,81 +102,77 @@
         }
 
         .container {
-            margin: 40px auto;
-            width: 95%;
-            max-width: 1400px;
             background: white;
+            margin: 30px auto;
             padding: 30px;
             border: 2px solid #A30303;
             border-radius: 10px;
+            width: 90%;
+            max-width: 1000px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
         }
 
-        h2 {
+        .container-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 2px solid #A30303;
+            padding-bottom: 10px;
+            margin-bottom: 20px;
+        }
+
+        .container-header h2 {
             color: #A30303;
-            margin-bottom: 30px;
-            font-size: 28px;
+            font-size: 24px;
         }
 
-        table {
-            width: 100%;
-            border-collapse: collapse;
-        }
-
-        th,
-        td {
-            border: 1px solid #A30303;
-            padding: 14px;
-            text-align: center;
-            font-size: 16px;
-        }
-
-        th {
+        .container-header button {
             background: #A30303;
             color: white;
-        }
-
-        td img {
-            width: 120px;
-            height: auto;
-            object-fit: cover;
-            border-radius: 10px;
-        }
-
-        .status-selesai {
-            background: green;
-            color: white;
-            padding: 8px 12px;
-            border-radius: 8px;
-            display: inline-block;
-        }
-
-        .status-menunggu {
-            background: orange;
-            color: white;
-            padding: 8px 12px;
-            border-radius: 8px;
-            display: inline-block;
-        }
-
-        .btn-hapus {
-            background: red;
-            color: white;
-            padding: 8px 15px;
             border: none;
-            border-radius: 8px;
-            font-size: 14px;
+            font-size: 20px;
+            width: 35px;
+            height: 35px;
+            border-radius: 5px;
             cursor: pointer;
         }
 
-        .btn-tanggapan {
-            background: #4CAF50;
-            color: white;
-            padding: 8px 12px;
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        label {
+            font-weight: bold;
+            margin-bottom: 5px;
+            display: block;
+            font-size: 16px;
+        }
+
+        input[type="text"],
+        textarea {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ccc;
             border-radius: 8px;
-            font-size: 14px;
-            margin-top: 5px;
-            text-decoration: none;
-            display: inline-block;
+            font-size: 16px;
+            background: #f0f0f0;
+        }
+
+        textarea {
+            resize: vertical;
+            min-height: 100px;
+        }
+
+        .foto-container {
+            margin-top: 10px;
+        }
+
+        .foto-container img {
+            width: 200px;
+            height: auto;
+            border: 2px solid #ccc;
+            padding: 5px;
+            border-radius: 10px;
         }
 
         footer {
@@ -184,18 +180,18 @@
             color: white;
             display: flex;
             justify-content: space-around;
-            padding: 40px 20px;
+            padding: 30px;
             flex-wrap: wrap;
-            margin-top: 60px;
+            margin-top: auto;
         }
 
         footer img {
-            width: 70px;
+            width: 60px;
             margin-bottom: 10px;
         }
 
         footer h3 {
-            margin-bottom: 15px;
+            margin-bottom: 10px;
         }
 
         footer a {
@@ -213,43 +209,8 @@
             background: #F12F2F;
             color: white;
             text-align: center;
-            padding: 15px;
+            padding: 10px;
             font-size: 14px;
-        }
-
-        .pagination {
-            display: flex;
-            justify-content: start;
-            margin-top: 25px;
-            list-style: none;
-            padding: 0;
-            gap: 5px;
-        }
-
-        .pagination li a,
-        .pagination li span {
-            padding: 10px 15px;
-            background-color: #fff;
-            color: #990000;
-            border-radius: 6px;
-            border: 1px solid #ddd;
-            text-decoration: none;
-            transition: all 0.3s ease;
-            font-weight: 500;
-            display: inline-block;
-        }
-
-        .pagination li.active span {
-            background-color: #990000;
-            color: white;
-            border-color: #990000;
-            box-shadow: 0 2px 5px rgba(153, 0, 0, 0.2);
-        }
-
-        .pagination li a:hover {
-            background-color: #f5f5f5;
-            border-color: #990000;
-            transform: translateY(-2px);
         }
     </style>
 </head>
@@ -279,7 +240,16 @@
                 </div>
             </div>
             <a href="status_pengaduan.php">STATUS PENGADUAN</a>
-            <a href="home2.php">PROFIL DESA</a>
+            <div class="dropdown">
+                <a href="home2.php">PROFIL DESA</a>
+                <div class="dropdown-content">
+                    <a href="sejarah_desa.php">Sejarah</a>
+                    <a href="struktur_organisasi.php">Struktur Organisasi</a>
+                    <a href="visi_misi.php">Visi dan Misi</a>
+                    <a href="lokasi.php">Lokasi</a>
+                    <a href="kontak.php">Kontak</a>
+                </div>
+            </div>
             <div class="user-info">
                 <a href="profile.php">👨🏻‍💼 {{ Auth::user()->name }}</a>
                 <a href="home2.php?logout=true">LOGOUT</a>
@@ -288,45 +258,31 @@
     </header>
 
     <div class="container">
-        <h2>Status Pengaduan Anda</h2>
-        <table>
-            <thead>
-                <tr>
-                    <th>NO</th>
-                    <th>JUDUL</th>
-                    <th>ISI</th>
-                    <th>FOTO</th>
-                    <th>STATUS</th>
-                    <th>AKSI</th>
-                </tr>
-            </thead>
-            <tbody>
-                @php
-                $i = ($pengaduan->currentPage() - 1) * $pengaduan->perPage() + 1;
-                @endphp
-                @foreach ($pengaduan as $index => $data)
-                <tr>
-                    <td>{{ $i++ }}</td>
-                    <td>{{ ($data['judul']) }}</td>
-                    <td>{{ $data['laporan']}}</td>
-                    <td><img src="{{ htmlspecialchars($data['foto']) }}" alt="Foto Dummy"></td>
-                    <td>
-                        <div class="{{ $data['status'] == 'Selesai' ? 'status-selesai' : 'status-menunggu' }}">{{ $data['status'] }}</div><br>
-                        <a href="{{ route('status-pengaduan.detail', $data['id']) }}" class="btn-tanggapan">Lihat Tanggapan</a>
-                    </td>
-                    <td>
-                        <form action="{{ route('status-pengaduan.delete', $data['id']) }}" method="POST" onsubmit="return confirm('Yakin ingin menghapus pengaduan ini?')">
-                            @csrf
-                            @method('DELETE')
-                            <button type="submit" class="btn-hapus">HAPUS</button>
-                        </form>
-                    </td>
-                </tr>
-                @endforeach
-            </tbody>
-        </table>
-        <div>
-            {{ $pengaduan->links() }}
+        <div class="container-header">
+            <h2>LIHAT TANGGAPAN</h2>
+            <button onclick="window.history.back()">X</button>
+        </div>
+
+        <div class="form-group">
+            <label>Judul Laporan</label>
+            <input type="text" value="pengaduan keamanan dan ketertiban" readonly>
+        </div>
+
+        <div class="form-group">
+            <label>Isi Laporan</label>
+            <input type="text" value="kehilangan motor" readonly>
+        </div>
+
+        <div class="form-group">
+            <label>Foto</label>
+            <div class="foto-container">
+                <img src="image/motor.jpeg" alt="Foto Laporan">
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label>Tanggapan</label>
+            <input type="text" value="baik akan kami proses" readonly>
         </div>
     </div>
 

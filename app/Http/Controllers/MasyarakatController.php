@@ -200,4 +200,41 @@ class MasyarakatController extends Controller
         ]);
         return redirect()->route('pengaduan-keamanan')->with('success', 'Pengaduan berhasil dikirim!');
     }
+
+    public function statusPengaduan()
+    {
+        if (Auth::check() && Auth::user()->level == 'Masyarakat') {
+            $pengaduan = Pengaduan::where('user_id', Auth::user()->id)
+                ->paginate(10);
+            return view('status-pengaduan', compact('pengaduan'));
+        } else if (Auth::check() && Auth::user()->level == 'Admin' || Auth::user()->level == 'Petugas') {
+            return redirect()->route('admin.dashboard');
+        } else {
+            return redirect()->route('login');
+        }
+    }
+
+    public function statusPengaduanDetail($id)
+    {
+        $user_id = Auth::id();
+    
+        $pengaduan = Pengaduan::where('id', $id)
+            ->where('user_id', $user_id)
+            ->first();
+
+        if ($pengaduan) {
+            return view('lihat-tanggapan', compact('pengaduan'));
+        } else {
+            return redirect()->route('status-pengaduan');
+        }
+    }
+
+    public function deletePengaduan($id)
+    {
+        $pengaduan = Pengaduan::find($id);
+        $pengaduan->delete();
+        return redirect()->back()->with('success', 'Pengaduan berhasil dihapus');
+    }
+    
+
 }
