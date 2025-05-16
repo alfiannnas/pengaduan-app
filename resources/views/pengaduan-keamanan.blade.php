@@ -321,8 +321,8 @@
             <label for="alamat">Alamat Lokasi Kejadian</label>
             <input type="text" id="alamat" name="alamat" placeholder="Contoh: Depan Balai Desa" required>
 
-            <label for="foto">Foto Bukti (Opsional)</label>
-            <input type="file" id="foto" name="foto" accept="image/*">
+            <label for="imgupload">Foto Bukti (Opsional)</label>
+            <input type="file" id="imgupload" name="imgupload" accept="image/*">
 
             <button type="submit" class="btn-kirim">KIRIM</button>
         </form>
@@ -380,4 +380,3 @@
 </body>
 
 </html>
-`

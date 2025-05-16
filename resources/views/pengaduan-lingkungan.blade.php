@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="id">
 
@@ -333,8 +332,8 @@
             <label for="alamat">Alamat Lokasi</label>
             <input type="text" id="alamat" name="alamat" placeholder="Contoh: RT 04 RW 03, Dekat Sungai" required>
 
-            <label for="foto">Foto Bukti</label>
-            <input type="file" id="foto" name="foto" accept="image/*">
+            <label for="imgupload">Foto Bukti (Opsional)</label>
+            <input type="file" id="imgupload" name="imgupload" accept="image/*">
 
             <button type="submit" class="btn-kirim">Kirim</button>
         </form>

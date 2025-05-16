@@ -344,8 +344,8 @@
             <label>Uraian Pengaduan</label>
             <textarea name="laporan" placeholder="Tuliskan uraian detail permasalahan Anda di sini..." required></textarea>
 
-            <label>Foto</label>
-            <input type="file" name="foto" accept="image/*">
+            <label for="imgupload">Foto Bukti (Opsional)</label>
+            <input type="file" id="imgupload" name="imgupload" accept="image/*">
 
             <button type="submit">Kirim</button>
         </form>

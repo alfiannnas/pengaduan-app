@@ -323,8 +323,8 @@
             <label for="alamat">Alamat Lokasi</label>
             <input type="text" id="alamat" name="alamat" placeholder="Contoh: RT 05 RW 02 Desa Tundagan" required>
 
-            <label for="foto">Foto Bukti (Opsional)</label>
-            <input type="file" id="foto" name="foto" accept="image/*">
+            <label for="imgupload">Foto Bukti (Opsional)</label>
+            <input type="file" id="imgupload" name="imgupload" accept="image/*">
 
             <button type="submit" class="btn-kirim">KIRIM</button>
         </form>

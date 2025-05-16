@@ -29,7 +29,13 @@ class MasyarakatController extends Controller
 
     public function storePengaduanBantuanSosial(Request $request)
     {
+        // Store Image
+        $extension = $request->file('imgupload')->extension();
+        $imgname = date('dmyHis') . '.' . $extension;
+        $request->file('imgupload')->storeAs('public/images', $imgname);
+        
         Pengaduan::create([
+            'user_id' => Auth::user()->id,
             'tanggal' => Carbon::now(),
             'nama' => Auth::user()->name,
             'nik' => Auth::user()->nik,
@@ -38,7 +44,7 @@ class MasyarakatController extends Controller
             'judul' => $request->judul,
             'laporan' => $request->laporan,
             'status' => 'Diproses',
-
+            'foto' => $imgname
         ]);
         return redirect()->route('pengaduan-bantuan-sosial')->with('success', 'Pengaduan berhasil dikirim!');
     }
@@ -56,7 +62,13 @@ class MasyarakatController extends Controller
 
     public function storePengaduanLingkungan(Request $request)
     {
+        // Store Image
+        $extension = $request->file('imgupload')->extension();
+        $imgname = date('dmyHis') . '.' . $extension;
+        $request->file('imgupload')->storeAs('public/images', $imgname);
+
         Pengaduan::create([
+            'user_id' => Auth::user()->id,
             'tanggal' => Carbon::now(),
             'nama' => Auth::user()->name,
             'nik' => Auth::user()->nik,
@@ -65,6 +77,7 @@ class MasyarakatController extends Controller
             'judul' => $request->judul,
             'laporan' => $request->laporan,
             'status' => 'Diproses',
+            'foto' => $imgname
         ]);
         return redirect()->route('pengaduan-lingkungan')->with('success', 'Pengaduan berhasil dikirim!');
     }
@@ -82,7 +95,13 @@ class MasyarakatController extends Controller
 
     public function storeKesalahanPenulisanData(Request $request)
     {
+        // Store Image
+        $extension = $request->file('imgupload')->extension();
+        $imgname = date('dmyHis') . '.' . $extension;
+        $request->file('imgupload')->storeAs('public/images', $imgname);
+
         Pengaduan::create([
+            'user_id' => Auth::user()->id,
             'tanggal' => Carbon::now(),
             'nama' => $request->nama,
             'nik' => $request->nik,
@@ -92,6 +111,7 @@ class MasyarakatController extends Controller
             'judul' => $request->judul,
             'laporan' => $request->laporan,
             'status' => 'Diproses',
+            'foto' => $imgname
         ]);
         return redirect()->route('kesalahan-penulisan-data')->with('success', 'Pengaduan berhasil dikirim!');
     }
@@ -109,7 +129,13 @@ class MasyarakatController extends Controller
 
     public function storePermasalahanDokumen(Request $request)
     {
+        // Store Image
+        $extension = $request->file('imgupload')->extension();
+        $imgname = date('dmyHis') . '.' . $extension;
+        $request->file('imgupload')->storeAs('public/images', $imgname);
+
         Pengaduan::create([
+            'user_id' => Auth::user()->id,
             'tanggal' => Carbon::now(),
             'nama' => $request->nama,
             'nik' => $request->nik,
@@ -119,6 +145,7 @@ class MasyarakatController extends Controller
             'judul' => $request->judul,
             'laporan' => $request->laporan,
             'status' => 'Diproses',
+            'foto' => $imgname
         ]);
         return redirect()->route('permasalahan-dokumen')->with('success', 'Pengaduan berhasil dikirim!');
     }
@@ -136,7 +163,13 @@ class MasyarakatController extends Controller
 
     public function storeKeterlambatanProses(Request $request)
     {
+        // Store Image
+        $extension = $request->file('imgupload')->extension();
+        $imgname = date('dmyHis') . '.' . $extension;
+        $request->file('imgupload')->storeAs('public/images', $imgname);
+
         Pengaduan::create([
+            'user_id' => Auth::user()->id,
             'tanggal' => Carbon::now(),
             'nama' => $request->nama,
             'nik' => $request->nik,
@@ -146,6 +179,7 @@ class MasyarakatController extends Controller
             'judul' => $request->judul,
             'laporan' => $request->laporan,
             'status' => 'Diproses',
+            'foto' => $imgname
         ]);
         return redirect()->route('keterlambatan-proses')->with('success', 'Pengaduan berhasil dikirim!');
     }
@@ -163,7 +197,13 @@ class MasyarakatController extends Controller
 
     public function storePelayananTidakSesuai(Request $request)
     {
+        // Store Image
+        $extension = $request->file('imgupload')->extension();
+        $imgname = date('dmyHis') . '.' . $extension;
+        $request->file('imgupload')->storeAs('public/images', $imgname);
+
         Pengaduan::create([
+            'user_id' => Auth::user()->id,
             'tanggal' => Carbon::now(),
             'nama' => $request->nama,
             'nik' => $request->nik,
@@ -173,6 +213,7 @@ class MasyarakatController extends Controller
             'judul' => $request->judul,
             'laporan' => $request->laporan,
             'status' => 'Diproses',
+            'foto' => $imgname
         ]);
         return redirect()->route('pelayanan-tidak-sesuai')->with('success', 'Pengaduan berhasil dikirim!');
     }
@@ -190,7 +231,13 @@ class MasyarakatController extends Controller
 
     public function storePengaduanKeamanan(Request $request)
     {
+        // Store Image
+        $extension = $request->file('imgupload')->extension();
+        $imgname = date('dmyHis') . '.' . $extension;
+        $request->file('imgupload')->storeAs('public/images', $imgname);
+
         Pengaduan::create([
+            'user_id' => Auth::user()->id,
             'tanggal' => Carbon::now(),
             'nama' => Auth::user()->name,
             'nik' => Auth::user()->nik,
@@ -199,6 +246,7 @@ class MasyarakatController extends Controller
             'judul' => $request->judul,
             'laporan' => $request->laporan,
             'status' => 'Diproses',
+            'foto' => $imgname
         ]);
         return redirect()->route('pengaduan-keamanan')->with('success', 'Pengaduan berhasil dikirim!');
     }
