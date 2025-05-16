@@ -40,6 +40,7 @@ Route::prefix('admin')->middleware('auth')->group(function () {
     Route::get('/profil-desa', [AdminController::class, 'profilDesa'])->name('admin.profil-desa');
 });
 
+Route::get('/', [MasyarakatController::class, 'home'])->name('home');
 Route::get('/home', [MasyarakatController::class, 'home'])->name('home');
 Route::get('/sejarah-desa', [MasyarakatController::class, 'sejarahDesa'])->name('sejarah-desa');
 Route::get('/struktur-organisasi', [MasyarakatController::class, 'strukturOrganisasi'])->name('struktur-organisasi');
