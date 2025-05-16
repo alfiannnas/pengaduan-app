@@ -282,9 +282,18 @@
                 </div>
             </div>
             <a href="{{ route('status-pengaduan') }}">STATUS PENGADUAN</a>
-            <a href="#">PROFIL DESA</a>
+            <div class="dropdown">
+                <a href="{{ route('home') }}">PROFIL DESA</a>
+                <div class="dropdown-content">
+                    <a href="{{ route('sejarah-desa') }}">Sejarah</a>
+                    <a href="{{ route('struktur-organisasi') }}">Struktur Organisasi</a>
+                    <a href="{{ route('visi-misi') }}">Visi dan Misi</a>
+                    <a href="{{ route('lokasi') }}">Lokasi</a>
+                    <a href="{{ route('kontak') }}">Kontak</a>
+                </div>
+            </div>
             <div class="user-info">
-                <a href="#">👨🏻‍💼 {{ Auth::user()->name }}</a>
+                <a href="{{ route('profile') }}">👨🏻‍💼 {{ Auth::user()->name }}</a>
                 <a href="{{ route('logout') }}">LOGOUT</a>
             </div>
         </nav>
