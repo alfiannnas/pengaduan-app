@@ -13,6 +13,7 @@ return new class extends Migration
     {
         Schema::table('pengaduan', function (Blueprint $table) {
             $table->bigInteger('user_id')->nullable();
+            $table->string('path')->nullable();
             $table->string('email')->nullable();
         });
     }
@@ -24,6 +25,7 @@ return new class extends Migration
     {
         Schema::table('pengaduan', function (Blueprint $table) {
             $table->dropColumn('user_id');
+            $table->dropColumn('path');
             $table->dropColumn('email');
         });
     }
