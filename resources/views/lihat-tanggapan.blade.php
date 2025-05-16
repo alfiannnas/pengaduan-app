@@ -279,7 +279,11 @@
         <div class="form-group">
             <label>Foto</label>
             <div class="foto-container">
-                <img src="{{ $pengaduan->foto }}" alt="Foto Laporan">
+            @if ($pengaduan->foto)
+                <img src="{{ asset('storage/images/' . $pengaduan->foto) }}" style="width:200px;" alt="Foto Bukti">
+            @else
+                <span>Tidak ada Foto</span>
+            @endif
             </div>
         </div>
 

@@ -312,7 +312,13 @@
                     <td>{{ $i++ }}</td>
                     <td>{{ ($data['judul']) }}</td>
                     <td>{{ $data['laporan']}}</td>
-                    <td><img src="{{ htmlspecialchars($data['foto']) }}" alt="Foto Dummy"></td>
+                    <td>
+                        @if ($data['foto'])
+                            <img src="{{ asset('storage/images/' . $data['foto']) }}" style="width:200px;" alt="Foto Bukti">
+                        @else
+                            <span>Tidak ada Foto</span>
+                        @endif
+                    </td>
                     <td>
                         <div class="{{ $data['status'] == 'Selesai' ? 'status-selesai' : 'status-menunggu' }}">{{ $data['status'] }}</div><br>
                         <a href="{{ route('status-pengaduan.detail', $data['id']) }}" class="btn-tanggapan">Lihat Tanggapan</a>

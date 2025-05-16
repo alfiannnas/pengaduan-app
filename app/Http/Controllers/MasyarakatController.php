@@ -32,7 +32,7 @@ class MasyarakatController extends Controller
         // Store Image
         $extension = $request->file('imgupload')->extension();
         $imgname = date('dmyHis') . '.' . $extension;
-        $request->file('imgupload')->storeAs('public/images', $imgname);
+        $request->file('imgupload')->storeAs('images', $imgname);
         
         Pengaduan::create([
             'user_id' => Auth::user()->id,
@@ -65,7 +65,7 @@ class MasyarakatController extends Controller
         // Store Image
         $extension = $request->file('imgupload')->extension();
         $imgname = date('dmyHis') . '.' . $extension;
-        $request->file('imgupload')->storeAs('public/images', $imgname);
+        $request->file('imgupload')->storeAs('images', $imgname);
 
         Pengaduan::create([
             'user_id' => Auth::user()->id,
@@ -98,7 +98,7 @@ class MasyarakatController extends Controller
         // Store Image
         $extension = $request->file('imgupload')->extension();
         $imgname = date('dmyHis') . '.' . $extension;
-        $request->file('imgupload')->storeAs('public/images', $imgname);
+        $request->file('imgupload')->storeAs('images', $imgname);
 
         Pengaduan::create([
             'user_id' => Auth::user()->id,
@@ -132,7 +132,7 @@ class MasyarakatController extends Controller
         // Store Image
         $extension = $request->file('imgupload')->extension();
         $imgname = date('dmyHis') . '.' . $extension;
-        $request->file('imgupload')->storeAs('public/images', $imgname);
+        $request->file('imgupload')->storeAs('images', $imgname);
 
         Pengaduan::create([
             'user_id' => Auth::user()->id,
@@ -166,7 +166,7 @@ class MasyarakatController extends Controller
         // Store Image
         $extension = $request->file('imgupload')->extension();
         $imgname = date('dmyHis') . '.' . $extension;
-        $request->file('imgupload')->storeAs('public/images', $imgname);
+        $request->file('imgupload')->storeAs('images', $imgname);
 
         Pengaduan::create([
             'user_id' => Auth::user()->id,
@@ -200,7 +200,7 @@ class MasyarakatController extends Controller
         // Store Image
         $extension = $request->file('imgupload')->extension();
         $imgname = date('dmyHis') . '.' . $extension;
-        $request->file('imgupload')->storeAs('public/images', $imgname);
+        $request->file('imgupload')->storeAs('images', $imgname);
 
         Pengaduan::create([
             'user_id' => Auth::user()->id,
@@ -234,7 +234,7 @@ class MasyarakatController extends Controller
         // Store Image
         $extension = $request->file('imgupload')->extension();
         $imgname = date('dmyHis') . '.' . $extension;
-        $request->file('imgupload')->storeAs('public/images', $imgname);
+        $request->file('imgupload')->storeAs('images', $imgname);
 
         Pengaduan::create([
             'user_id' => Auth::user()->id,
