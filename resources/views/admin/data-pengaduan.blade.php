@@ -105,8 +105,7 @@
         }
 
         img.foto {
-            width: 60px;
-            height: 60px;
+            width: 160px;
             object-fit: cover;
             border-radius: 8px;
             border: 2px solid #ccc;
@@ -355,7 +354,13 @@
                         <td>{{ $data->no_hp }}</td>
                         <td>{{ $data->judul }}</td>
                         <td>{{ $data->laporan }}</td>
-                        <td><img src="admin/{{ $data->foto }}" class="foto" alt="Foto Pengaduan"></td>
+                        <td>                  
+                            @if ($data['foto'])
+                                <img src="{{ asset('storage/images/' . $data->foto) }}" style="width:200px;" class="foto" alt="Foto Pengaduan">
+                            @else
+                                <span>Tidak ada Foto</span>
+                            @endif
+                        </td>
                         <td>{{ $data->status }}</td>
                         <td style="display: flex; flex-direction: column; gap: 4px;">
                             <form method="post" action="{{ route('admin.verifikasi-pengaduan') }}">
@@ -392,7 +397,8 @@
             <span class="close" id="closeTanggapanModal">&times;</span>
             <h2>Tanggapan Pengaduan</h2>
             <div id="detailPengaduan">
-                <img id="fotoDetail" src="" alt="Foto Pengaduan" class="foto">
+                <img id="fotoDetail" src="" alt="Foto Pengaduan" class="foto" style="display:none;">
+                <div id="noFotoDetail" style="display:none; color:red; margin-bottom:20px;">Tidak Ada Foto</div>
                 <div class="form-group">
                     <label>Tanggal:</label>
                     <div id="tanggalDetail"></div>
@@ -431,7 +437,16 @@
         const closeTanggapanBtn = document.getElementById('closeTanggapanModal');
 
         function openModal(data) {
-            document.getElementById('fotoDetail').src = "admin/" + data.foto;
+            const fotoDetail = document.getElementById('fotoDetail');
+            const noFotoDetail = document.getElementById('noFotoDetail');
+            if (data.foto && data.foto !== "") {
+                fotoDetail.src = "/storage/images/" + data.foto;
+                fotoDetail.style.display = "block";
+                noFotoDetail.style.display = "none";
+            } else {
+                fotoDetail.style.display = "none";
+                noFotoDetail.style.display = "block";
+            }
             document.getElementById('tanggalDetail').textContent = data.tanggal;
             document.getElementById('namaDetail').textContent = data.nama;
             document.getElementById('nikDetail').textContent = data.nik;
@@ -442,9 +457,7 @@
             // Memuat data tanggapan jika ada
             if (data.tanggapan_detail && data.tanggapan_detail.tanggapan) {
                 document.getElementById('tanggapanTextarea').value = data.tanggapan_detail.tanggapan;
-                console.log(data.tanggapan_detail.tanggapan);
             } else {
-                console.log('tidak ada tanggapan');
                 document.getElementById('tanggapanTextarea').value = '';
             }
 
