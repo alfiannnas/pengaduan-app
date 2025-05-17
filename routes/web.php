@@ -38,6 +38,9 @@ Route::prefix('admin')->middleware('auth')->group(function () {
     Route::post('/verifikasi-pengaduan', [AdminController::class, 'verifikasiPengaduan'])->name('admin.verifikasi-pengaduan');
     Route::post('/tanggapi-pengaduan', [AdminController::class, 'tanggapiPengaduan'])->name('admin.tanggapi-pengaduan');
     Route::get('/profil-desa', [AdminController::class, 'profilDesa'])->name('admin.profil-desa');
+    Route::delete('/profil-desa/{id}', [AdminController::class, 'deleteProfilDesa'])->name('admin.profil-desa.delete');
+    Route::post('/profil-desa', [AdminController::class, 'storeProfilDesa'])->name('admin.profil-desa.store');
+    Route::post('/profil-desa/update', [AdminController::class, 'updateProfilDesa'])->name('admin.profil-desa.update');
 });
 
 Route::get('/', [MasyarakatController::class, 'home'])->name('home');

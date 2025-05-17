@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Pengaduan;
+use App\Models\ProfileDesa;
 use App\Models\Tanggapan;
 use App\Models\User;
 use Carbon\Carbon;
@@ -276,6 +277,35 @@ class AdminController extends Controller
 
     public function profilDesa()
     {
-        return view('admin.profil-desa');
+        $profilDesa = ProfileDesa::all();
+        return view('admin.profil-desa', compact('profilDesa'));
+    }
+
+    public function storeProfilDesa(Request $request)
+    {
+        ProfileDesa::create([
+            'nama' => 'Nama Baru',
+            'level' => 'Admin',
+        ]);
+
+        return redirect()->route('admin.profil-desa')->with('success', 'Profil Desa berhasil ditambahkan');
+    }
+
+    public function deleteProfilDesa(Request $request)
+    {
+        $profilDesa = ProfileDesa::find($request->id);
+        $profilDesa->delete();
+
+        return redirect()->route('admin.profil-desa')->with('success', 'Profil Desa berhasil dihapus');
+    }
+
+    public function updateProfilDesa(Request $request)
+    {
+        $profilDesa = ProfileDesa::find($request->id);
+
+        $profilDesa->nama = $request->nama;
+        $profilDesa->save();
+
+        return redirect()->route('admin.profil-desa')->with('success', 'Profil Desa berhasil diubah');
     }
 }
