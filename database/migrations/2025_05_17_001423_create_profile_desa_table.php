@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('profile_desa', function (Blueprint $table) {
             $table->id();
             $table->string('nama')->nullable();
+            $table->string('level')->nullable();
             $table->softDeletes();
             $table->timestamps();
         });
