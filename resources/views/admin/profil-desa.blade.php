@@ -172,11 +172,6 @@
                         <td>{{ $data['nama'] }}</td>
                         <td>{{ $data['level'] }}</td>
                         <td>
-                            <form method="post" style="display:inline;">
-                                @csrf
-                                <input type="hidden" name="tambah" value="1">
-                                <button type="submit" class="btn btn-tambah">Tambah</button>
-                            </form>
                             <form method="post" action="{{ route('admin.profil-desa.update') }}" style="display:inline;">
                                 @csrf
                                 <input type="hidden" name="id" value="{{ $data['id'] }}">
