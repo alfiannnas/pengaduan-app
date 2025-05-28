@@ -209,10 +209,17 @@ class AdminController extends Controller
 
     public function tanggapiPengaduan(Request $request)
     {
-        $pengaduanId = Pengaduan::find($request->pengaduan_id);
-        $tanggapan = Tanggapan::where('pengaduan_id', $pengaduanId->id)->first();
+        $pengaduan = Pengaduan::find($request->pengaduan_id);
+
+        $tanggapan = new Tanggapan();
+        $tanggapan->pengaduan_id = $pengaduan->id;
         $tanggapan->tanggapan = $request->tanggapan;
+        
+        $pengaduan->status = 'Selesai';
+        $pengaduan->save();
+        
         $tanggapan->save();
+        
         return redirect()->back()->with('success', 'Pengaduan berhasil ditanggapi');
     }
 
