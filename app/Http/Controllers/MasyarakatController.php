@@ -36,6 +36,7 @@ class MasyarakatController extends Controller
         
         Pengaduan::create([
             'user_id' => Auth::user()->id,
+            'jenis_pengaduan' => 'Pengaduan Bantuan Sosial',
             'tanggal' => Carbon::now(),
             'nama' => Auth::user()->name,
             'nik' => Auth::user()->nik,

@@ -12,6 +12,7 @@ class Pengaduan extends Model
     protected $table = 'pengaduan';
     protected $fillable = [
         'user_id',
+        'jenis_pengaduan',
         'tanggal',
         'nama',
         'nik',
