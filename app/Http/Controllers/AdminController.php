@@ -97,10 +97,29 @@ class AdminController extends Controller
         );
     }
 
-    public function dataPengaduan()
+    public function dataPengaduan(Request $request)
     {
-        $pengaduan = Pengaduan::with('tanggapanDetail')->paginate(10);
-        return view('admin.data-pengaduan', compact('pengaduan'));
+        $query = Pengaduan::with('tanggapanDetail');
+        
+        // Add filter for jenis_pengaduan if it exists in request
+        if ($request->has('jenis_pengaduan') && $request->jenis_pengaduan != '') {
+            $query->where('jenis_pengaduan', $request->jenis_pengaduan);
+        }
+        
+        $pengaduan = $query->paginate(10);
+        
+        // Hardcoded jenis pengaduan values
+        $jenisPengaduan = [
+            'Pengaduan Bantuan Sosial',
+            'Pengaduan Lingkungan',
+            'Pengaduan Kesalahan Penulisan Data',
+            'Pengaduan Permasalahan Dokumen',
+            'Pengaduan Keterlambatan Proses',
+            'Pengaduan Pelayanan Tidak Sesuai',
+            'Pengaduan Keamanan'
+        ];
+        
+        return view('admin.data-pengaduan', compact('pengaduan', 'jenisPengaduan'));
     }
 
     public function deletePengaduan($id)
@@ -146,6 +165,7 @@ class AdminController extends Controller
                         'Alamat',
                         'No HP',
                         'Judul',
+                        'Jenis Pengaduan',
                         'Laporan',
                         'Status',
                         'Tanggapan',
@@ -163,6 +183,7 @@ class AdminController extends Controller
                         $row->alamat ?? 'N/A',
                         $row->no_hp ?? 'N/A',
                         $row->judul ?? 'N/A',
+                        $row->jenis_pengaduan ?? 'N/A',
                         $row->laporan ?? 'N/A',
                         $row->status,
                         $row->tanggapanDetail->tanggapan ?? 'N/A',
