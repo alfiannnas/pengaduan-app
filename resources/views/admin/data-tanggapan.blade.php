@@ -264,9 +264,12 @@
                     </tr>
                 </thead>
                 <tbody>
+                    @php
+                    $i = ($tanggapan->currentPage() - 1) * $tanggapan->perPage() + 1;
+                    @endphp
                     @foreach($tanggapan as $t)
                     <tr>
-                        <td>{{ $t->id }}</td>
+                        <td>{{ $i++ }}</td>
                         <td>{{ Carbon\Carbon::parse($t->pengaduan->tanggal)->format('Y-m-d') }}</td>
                         <td>{{ $t->pengaduan->nama }}</td>
                         <td>{{ $t->pengaduan->nik }}</td>

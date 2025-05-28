@@ -10,6 +10,7 @@ use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Hash;
 use Maatwebsite\Excel\Facades\Excel;
+use Illuminate\Support\Facades\DB;
 
 class AdminController extends Controller
 {
@@ -24,9 +25,14 @@ class AdminController extends Controller
 
     public function dataTanggapan()
     {
-            $tanggapan = Tanggapan::with('pengaduan')
-                ->whereHas('pengaduan')
-                ->paginate(10);
+        $tanggapan = Tanggapan::with('pengaduan')
+            ->whereHas('pengaduan')
+            ->select('tanggapan.*')
+            ->join(DB::raw('(SELECT pengaduan_id, MAX(created_at) as latest_date FROM tanggapan GROUP BY pengaduan_id) as latest'), function($join) {
+                $join->on('tanggapan.pengaduan_id', '=', 'latest.pengaduan_id')
+                     ->on('tanggapan.created_at', '=', 'latest.latest_date');
+            })
+            ->paginate(10);
         return view('admin.data-tanggapan', compact('tanggapan'));
     }
 
