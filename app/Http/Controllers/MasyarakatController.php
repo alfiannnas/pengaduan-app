@@ -70,6 +70,7 @@ class MasyarakatController extends Controller
 
         Pengaduan::create([
             'user_id' => Auth::user()->id,
+            'jenis_pengaduan' => 'Pengaduan Lingkungan',
             'tanggal' => Carbon::now(),
             'nama' => Auth::user()->name,
             'nik' => Auth::user()->nik,
@@ -103,6 +104,7 @@ class MasyarakatController extends Controller
 
         Pengaduan::create([
             'user_id' => Auth::user()->id,
+            'jenis_pengaduan' => 'Pengaduan Kesalahan Penulisan Data',
             'tanggal' => Carbon::now(),
             'nama' => $request->nama,
             'nik' => $request->nik,
@@ -137,6 +139,7 @@ class MasyarakatController extends Controller
 
         Pengaduan::create([
             'user_id' => Auth::user()->id,
+            'jenis_pengaduan' => 'Pengaduan Permasalahan Dokumen',
             'tanggal' => Carbon::now(),
             'nama' => $request->nama,
             'nik' => $request->nik,
@@ -171,6 +174,7 @@ class MasyarakatController extends Controller
 
         Pengaduan::create([
             'user_id' => Auth::user()->id,
+            'jenis_pengaduan' => 'Pengaduan Keterlambatan Proses',
             'tanggal' => Carbon::now(),
             'nama' => $request->nama,
             'nik' => $request->nik,
@@ -205,6 +209,7 @@ class MasyarakatController extends Controller
 
         Pengaduan::create([
             'user_id' => Auth::user()->id,
+            'jenis_pengaduan' => 'Pengaduan Pelayanan Tidak Sesuai',
             'tanggal' => Carbon::now(),
             'nama' => $request->nama,
             'nik' => $request->nik,
@@ -239,6 +244,7 @@ class MasyarakatController extends Controller
 
         Pengaduan::create([
             'user_id' => Auth::user()->id,
+            'jenis_pengaduan' => 'Pengaduan Keamanan',
             'tanggal' => Carbon::now(),
             'nama' => Auth::user()->name,
             'nik' => Auth::user()->nik,
