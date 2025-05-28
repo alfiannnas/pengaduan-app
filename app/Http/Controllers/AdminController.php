@@ -23,17 +23,44 @@ class AdminController extends Controller
         return view('admin.dashboard', compact('pengaduan', 'tanggapan', 'masyarakat', 'petugas'));
     }
 
-    public function dataTanggapan()
+    public function dataTanggapan(Request $request)
     {
-        $tanggapan = Tanggapan::with('pengaduan')
+        $query = Tanggapan::with('pengaduan')
             ->whereHas('pengaduan')
             ->select('tanggapan.*')
             ->join(DB::raw('(SELECT pengaduan_id, MAX(created_at) as latest_date FROM tanggapan GROUP BY pengaduan_id) as latest'), function($join) {
                 $join->on('tanggapan.pengaduan_id', '=', 'latest.pengaduan_id')
                      ->on('tanggapan.created_at', '=', 'latest.latest_date');
-            })
-            ->paginate(10);
-        return view('admin.data-tanggapan', compact('tanggapan'));
+            });
+
+        // Filter by nama
+        if ($request->has('nama') && $request->nama != '') {
+            $query->whereHas('pengaduan', function($q) use ($request) {
+                $q->where('nama', 'like', '%' . $request->nama . '%');
+            });
+        }
+
+        // Filter by jenis_pengaduan
+        if ($request->has('jenis_pengaduan') && $request->jenis_pengaduan != '') {
+            $query->whereHas('pengaduan', function($q) use ($request) {
+                $q->where('jenis_pengaduan', $request->jenis_pengaduan);
+            });
+        }
+
+        $tanggapan = $query->paginate(10);
+        
+        // Get unique jenis pengaduan values for filter dropdown
+        $jenisPengaduan = [
+            'Pengaduan Bantuan Sosial',
+            'Pengaduan Lingkungan',
+            'Pengaduan Kesalahan Penulisan Data',
+            'Pengaduan Permasalahan Dokumen',
+            'Pengaduan Keterlambatan Proses',
+            'Pengaduan Pelayanan Tidak Sesuai',
+            'Pengaduan Keamanan'
+        ];
+        
+        return view('admin.data-tanggapan', compact('tanggapan', 'jenisPengaduan'));
     }
 
     public function deleteTanggapan($id)

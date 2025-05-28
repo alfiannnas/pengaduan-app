@@ -116,6 +116,21 @@
             color: #333;
         }
 
+        .btn {
+            padding: 6px 14px;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 12px;
+            font-weight: bold;
+            margin: 2px;
+        }
+
+        .btn-verifikasi {
+            background-color: #28a745;
+            color: #fff;
+        }
+
         .btn-export {
             background-color: #28a745;
             color: #fff;
@@ -246,6 +261,41 @@
                 @csrf
                 <button type="submit" name="export" value="1" class="btn-export">Export</button>
             </form>
+
+            <!-- Add filter form -->
+            <form method="GET" action="{{ route('admin.data-tanggapan') }}" style="margin-bottom: 20px;">
+                <div style="display: flex; gap: 10px; align-items: center; flex-wrap: wrap;">
+                    <!-- Nama filter -->
+                    <div style="display: flex; gap: 10px; align-items: center;">
+                        <input type="text" 
+                               name="nama" 
+                               placeholder="Cari berdasarkan nama..." 
+                               value="{{ request('nama') }}"
+                               style="width: 250px; padding: 8px; border-radius: 6px; border: 1px solid #ccc;">
+                    </div>
+
+                    <!-- Jenis Pengaduan filter -->
+                    <div style="display: flex; gap: 10px; align-items: center;">
+                        <select name="jenis_pengaduan" class="form-control" style="width: 250px; padding: 8px; border-radius: 6px; border: 1px solid #ccc;">
+                            <option value="">Semua Jenis Pengaduan</option>
+                            @foreach($jenisPengaduan as $jenis)
+                                <option value="{{ $jenis }}" {{ request('jenis_pengaduan') == $jenis ? 'selected' : '' }}>
+                                    {{ $jenis }}
+                                </option>
+                            @endforeach
+                        </select>
+                    </div>
+
+                    <!-- Buttons -->
+                    <div style="display: flex; gap: 10px;">
+                        <button type="submit" class="btn btn-verifikasi" style="padding: 8px 16px;">Filter</button>
+                        @if(request('jenis_pengaduan') || request('nama'))
+                            <a href="{{ route('admin.data-tanggapan') }}" class="btn btn-hapus" style="padding: 8px 16px;">Reset</a>
+                        @endif
+                    </div>
+                </div>
+            </form>
+
             <h2>Data Tanggapan</h2>
             <table>
                 <thead>
