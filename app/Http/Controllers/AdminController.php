@@ -222,8 +222,7 @@ class AdminController extends Controller
 
         $pengaduan = Pengaduan::find($request->pengaduan_id);
 
-        $tanggapan = new Tanggapan();
-        $tanggapan->pengaduan_id = $pengaduan->id;
+        $tanggapan = Tanggapan::firstOrNew(['pengaduan_id' => $pengaduan->id]);
         $tanggapan->tanggapan = $request->tanggapan;
         
         // Handle file upload
