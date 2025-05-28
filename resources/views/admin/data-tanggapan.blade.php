@@ -161,6 +161,24 @@
             font-weight: bold;
         }
 
+        .btn-download {
+            background-color: #007bff;
+            color: #fff;
+            padding: 5px 12px;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 12px;
+            font-weight: bold;
+            text-decoration: none;
+            display: inline-block;
+            margin-right: 5px;
+        }
+
+        .btn-download:hover {
+            background-color: #0056b3;
+        }
+
         .pagination {
             display: flex;
             justify-content: start;
@@ -240,6 +258,7 @@
                         <th>NO HP</th>
                         <th>JUDUL</th>
                         <th>TANGGAPAN</th>
+                        <th>FILE</th>
                         <th>STATUS</th>
                         <th>AKSI</th>
                     </tr>
@@ -255,6 +274,15 @@
                         <td>{{ $t->pengaduan->no_hp }}</td>
                         <td>{{ $t->pengaduan->judul }}</td>
                         <td>{{ $t->tanggapan }}</td>
+                        <td>
+                            @if($t->file_tanggapan)
+                                <a href="{{ Storage::url('tanggapan/' . $t->file_tanggapan) }}" class="btn-download" download>
+                                    Download File
+                                </a>
+                            @else
+                                <span style="color: #666;">Tidak ada file</span>
+                            @endif
+                        </td>
                         <td><span class="badge {{ $t->pengaduan->status === 'Diproses' ? 'badge-warning' : 'badge-success'}}">{{ $t->pengaduan->status }}</span></td>
                         <td>
                             <form action="{{ route('admin.delete-tanggapan', $t['id']) }}" method="POST" style="display:inline;">

@@ -12,6 +12,7 @@ class Tanggapan extends Model
     protected $fillable = [
         'pengaduan_id',
         'tanggapan',
+        'file_tanggapan',
     ];
 
     public function pengaduan()

@@ -457,12 +457,23 @@
                     <div id="laporanDetail"></div>
                 </div>
             </div>
-            <form action="{{ route('admin.tanggapi-pengaduan') }}" method="POST">
+            <form action="{{ route('admin.tanggapi-pengaduan') }}" method="POST" enctype="multipart/form-data">
                 @csrf
                 <input type="hidden" name="pengaduan_id" id="pengaduanId">
                 <div class="form-group">
                     <label>Tanggapan:</label>
                     <textarea name="tanggapan" id="tanggapanTextarea" rows="4" required></textarea>
+                </div>
+                <div class="form-group">
+                    <label>Upload File (PDF/DOC/DOCX/Image):</label>
+                    <input type="file" name="file_tanggapan" accept=".pdf,.doc,.docx,.jpg,.jpeg,.png" class="form-control" style="width: 100%; padding: 8px; border-radius: 6px; border: 1px solid #ccc;">
+                    <small style="color: #666; font-size: 12px;">Maksimal ukuran file: 2MB</small>
+                </div>
+                <div id="existingFileContainer" style="display: none; margin-bottom: 15px;">
+                    <label>File Terlampir:</label>
+                    <a href="#" id="downloadFileLink" class="btn btn-tanggapi" style="display: inline-block; margin-top: 5px;">
+                        Download File
+                    </a>
                 </div>
                 <button type="submit" class="btn btn-verifikasi">Tanggapi</button>
             </form>
@@ -476,6 +487,9 @@
         function openModal(data) {
             const fotoDetail = document.getElementById('fotoDetail');
             const noFotoDetail = document.getElementById('noFotoDetail');
+            const existingFileContainer = document.getElementById('existingFileContainer');
+            const downloadFileLink = document.getElementById('downloadFileLink');
+            
             if (data.foto && data.foto !== "") {
                 fotoDetail.src = "/storage/images/" + data.foto;
                 fotoDetail.style.display = "block";
@@ -484,6 +498,15 @@
                 fotoDetail.style.display = "none";
                 noFotoDetail.style.display = "block";
             }
+            
+            // Handle file display
+            if (data.tanggapan_detail && data.tanggapan_detail.file_tanggapan) {
+                existingFileContainer.style.display = "block";
+                downloadFileLink.href = "/storage/tanggapan/" + data.tanggapan_detail.file_tanggapan;
+            } else {
+                existingFileContainer.style.display = "none";
+            }
+            
             document.getElementById('tanggalDetail').textContent = data.tanggal;
             document.getElementById('namaDetail').textContent = data.nama;
             document.getElementById('nikDetail').textContent = data.nik;

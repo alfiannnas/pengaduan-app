@@ -209,11 +209,25 @@ class AdminController extends Controller
 
     public function tanggapiPengaduan(Request $request)
     {
+        $request->validate([
+            'tanggapan' => 'required',
+            'file_tanggapan' => 'nullable|file|mimes:pdf,doc,docx,jpg,jpeg,png|max:2048'
+        ]);
+
         $pengaduan = Pengaduan::find($request->pengaduan_id);
 
         $tanggapan = new Tanggapan();
         $tanggapan->pengaduan_id = $pengaduan->id;
         $tanggapan->tanggapan = $request->tanggapan;
+        
+        // Handle file upload
+        if ($request->hasFile('file_tanggapan')) {
+            $file = $request->file('file_tanggapan');
+            $filename = time() . '_' . $file->getClientOriginalName();
+            // Store in public disk
+            $file->move(public_path('storage/tanggapan'), $filename);
+            $tanggapan->file_tanggapan = $filename;
+        }
         
         $pengaduan->status = 'Selesai';
         $pengaduan->save();
