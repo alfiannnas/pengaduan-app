@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>Profil Desa - Admin</title>
+    <title>Edit Profil Desa - Admin</title>
     <style>
         body {
             margin: 0;
@@ -131,6 +131,31 @@
             background-color: #dc3545;
             color: #fff;
         }
+
+        input[type="text"], textarea {
+            font-family: 'Poppins', sans-serif;
+            font-size: 14px;
+        }
+
+        input[type="text"]:focus, textarea:focus {
+            outline: none;
+            border-color: #990000;
+        }
+
+        .btn-ubah {
+            background-color: #990000;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: bold;
+        }
+
+        .btn-ubah:hover {
+            background-color: #7a0000;
+        }
     </style>
 </head>
 
@@ -156,40 +181,27 @@
         <h1>Profil Desa</h1>
 
         <div class="card-table">
-            <table>
-                <thead>
-                    <tr>
-                        <th>NO</th>
-                        <th style="width: 400px;">NAMA</th>
-                        <th>LEVEL</th>
-                        <th>AKSI</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @foreach($profilDesa as $index => $data)
-                    <tr>
-                        <td>{{ $index + 1 }}</td>
-                        <td>{{ $data['nama'] }}</td>
-                        <td>{{ $data['level'] }}</td>
-                        <td>
-                        <form method="get" action="{{ route('admin.profil-desa.edit', ['id' => $data['id']]) }}" style="display:inline;">
-                                @csrf
-                                <input type="hidden" name="id" value="{{ $data['id'] }}">
-                                <input type="text" name="nama" value="{{ $data['nama'] }}" style="display:none;">
-                                <button type="submit" class="btn btn-ubah">Ubah</button>
-                            </form>
-                            <form method="post" action="{{ route('admin.profil-desa.delete', ['id' => $data['id']]) }}" style="display:inline;">
-                                @csrf
-                                @method('DELETE')
-                                <button type="submit" name="hapus" class="btn btn-hapus" onclick="return confirm('Yakin ingin menghapus?')">Hapus</button>
-                            </form>
-                        </td>
-                    </tr>
-                    @endforeach
-                </tbody>
-            </table>
+        <form action="{{ route('admin.profil-desa.update', ['id' => $profilDesa->id]) }}" method="POST">
+                @csrf
+                <div style="margin-bottom: 20px;">
+                    <label for="nama" style="display: block; margin-bottom: 8px; font-weight: bold;">Nama Profil</label>
+                    <input type="text" id="nama" name="nama" value="{{ $profilDesa->nama ?? '' }}" 
+                        style="width: 100%; padding: 8px; border: 1px solid #ddd; border-radius: 4px;">
+                </div>
+
+                <div style="margin-bottom: 20px;">
+                    <label for="deskripsi" style="display: block; margin-bottom: 8px; font-weight: bold;">Deskripsi</label>
+                    <textarea id="deskripsi" name="deskripsi" rows="10" 
+                        style="width: 100%; padding: 8px; border: 1px solid #ddd; border-radius: 4px;">{{ $profilDesa->deskripsi ?? '' }}</textarea>
+                </div>
+
+                <button type="submit" class="btn btn-ubah" style="padding: 10px 20px; font-size: 14px;">
+                    Simpan Perubahan
+                </button>
+            </form>
         </div>
     </div>
+
 
 </body>
 

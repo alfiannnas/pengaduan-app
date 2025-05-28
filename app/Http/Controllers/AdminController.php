@@ -343,6 +343,12 @@ class AdminController extends Controller
         return redirect()->route('admin.profil-desa')->with('success', 'Profil Desa berhasil ditambahkan');
     }
 
+    public function editProfilDesa($id)
+    {
+        $profilDesa = ProfileDesa::find($id);
+        return view('admin.edit-profil-desa', compact('profilDesa'));
+    }
+
     public function deleteProfilDesa(Request $request)
     {
         $profilDesa = ProfileDesa::find($request->id);
@@ -351,11 +357,12 @@ class AdminController extends Controller
         return redirect()->route('admin.profil-desa')->with('success', 'Profil Desa berhasil dihapus');
     }
 
-    public function updateProfilDesa(Request $request)
+    public function updateProfilDesa(Request $request, $id)
     {
-        $profilDesa = ProfileDesa::find($request->id);
+        $profilDesa = ProfileDesa::find($id);
 
         $profilDesa->nama = $request->nama;
+        $profilDesa->deskripsi = $request->deskripsi;
         $profilDesa->save();
 
         return redirect()->route('admin.profil-desa')->with('success', 'Profil Desa berhasil diubah');

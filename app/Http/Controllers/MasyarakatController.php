@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Pengaduan;
 use App\Models\User;
+use App\Models\ProfileDesa;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -295,7 +296,8 @@ class MasyarakatController extends Controller
 
     public function sejarahDesa()
     {
-        return view('sejarah-desa');
+        $sejarahDesa = ProfileDesa::where('nama', 'Sejarah')->first();
+        return view('sejarah-desa', compact('sejarahDesa'));
     }
 
     public function strukturOrganisasi()

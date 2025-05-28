@@ -245,23 +245,17 @@
 
         <div class="sejarah-container">
             <div class="text-content">
-                <p>Desa Tundagan berdiri sejak masa penjajahan Belanda dan menjadi basis gerilyawan RI. Pada tahun 1920, Desa dipimpin Lurah Tirta Yuda selama 15 tahun, ditandai dengan semangat gotong royong meski masyarakat mengalami kelaparan akibat kekurangan pangan.</p>
-
-                <div id="hiddenText" class="hidden-text">
-                    <p>Tahun 1935–1944, Lurah Tarojan memimpin di tengah tekanan tentara Belanda yang membuat banyak warga mengungsi ke hutan. Pada 1945–1960, di bawah Lurah Arjadirana, masyarakat membangun lumbung desa untuk mengatasi kekurangan pangan. Namun, desa juga menghadapi wabah penyakit akibat lingkungan kumuh.</p>
-
-                    <p>Lurah Mujawikarta (1960–1987) memfokuskan pada pelebaran jalan, pembangunan balai desa, dan renovasi lumbung. Dilanjutkan oleh Lurah Jamhari (1987–1997), pembangunan infrastruktur seperti jalan penghubung antar desa dan pengadaan listrik tenaga air mulai berkembang.</p>
-
-                    <p>Pada era Lurah Bunyamin (1997–2006), pembangunan besar-besaran dilakukan, seperti penyediaan air bersih, pengaspalan jalan, pengadaan listrik PLN, dan pembangunan jembatan Sungai Polaga. Namun, bencana tanah longsor dan banjir bandang sempat melanda desa, merelokasi banyak warga.</p>
-
-                    <p>Tahun 2006–2009, di bawah kepemimpinan Imam Mahdi dan PJS Hadi Safa\'at, pembangunan PAMSIMAS, balai desa, dan drainase dilaksanakan.</p>
-
-                    <p>Sejak 2010, Kepala Desa Nurul Humam melanjutkan pembangunan besar seperti pengaspalan jalan, rabat beton, pembangunan irigasi, pengadaan PLTS, embung, dan menara telekomunikasi, meningkatkan infrastruktur dan kesejahteraan masyarakat.</p>
-
-                    <p>Desa Tundagan terus berkembang dengan semangat gotong royong dan pengelolaan yang baik hingga saat ini.</p>
+                <div id="shortText">
+                    <p>{!! nl2br(Str::limit($sejarahDesa->deskripsi, 300)) !!}</p>
                 </div>
 
-                <button id="readMoreBtn" class="selengkapnya" onclick="toggleText()">Selengkapnya</button>
+                <div id="fullText" style="display: none;">
+                    <p>{!! nl2br($sejarahDesa->deskripsi) !!}</p>
+                </div>
+
+                @if(strlen($sejarahDesa->deskripsi) > 300)
+                    <button id="readMoreBtn" class="selengkapnya" onclick="toggleText()">Selengkapnya</button>
+                @endif
             </div>
 
             <div class="image-content">
@@ -303,18 +297,21 @@
     </div>
 
     <script>
-        function toggleText() {
-            var hiddenText = document.getElementById('hiddenText');
-            var btn = document.getElementById('readMoreBtn');
+    function toggleText() {
+        const shortText = document.getElementById('shortText');
+        const fullText = document.getElementById('fullText');
+        const button = document.getElementById('readMoreBtn');
 
-            if (hiddenText.style.display === 'none' || hiddenText.style.display === '') {
-                hiddenText.style.display = 'block';
-                btn.textContent = 'Sembunyikan';
-            } else {
-                hiddenText.style.display = 'none';
-                btn.textContent = 'Selengkapnya';
-            }
+        if (shortText.style.display !== 'none') {
+            shortText.style.display = 'none';
+            fullText.style.display = 'block';
+            button.textContent = 'Tutup';
+        } else {
+            shortText.style.display = 'block';
+            fullText.style.display = 'none';
+            button.textContent = 'Selengkapnya';
         }
+    }
     </script>
 
 </body>

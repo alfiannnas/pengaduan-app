@@ -40,7 +40,8 @@ Route::prefix('admin')->middleware('auth')->group(function () {
     Route::get('/profil-desa', [AdminController::class, 'profilDesa'])->name('admin.profil-desa');
     Route::delete('/profil-desa/{id}', [AdminController::class, 'deleteProfilDesa'])->name('admin.profil-desa.delete');
     Route::post('/profil-desa', [AdminController::class, 'storeProfilDesa'])->name('admin.profil-desa.store');
-    Route::post('/profil-desa/update', [AdminController::class, 'updateProfilDesa'])->name('admin.profil-desa.update');
+    Route::post('/profil-desa/update/{id}', [AdminController::class, 'updateProfilDesa'])->name('admin.profil-desa.update');
+    Route::get('/profil-desa/edit/{id}', [AdminController::class, 'editProfilDesa'])->name('admin.profil-desa.edit');
 });
 
 Route::get('/', [MasyarakatController::class, 'home'])->name('home');
