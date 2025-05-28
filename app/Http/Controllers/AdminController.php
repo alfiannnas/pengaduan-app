@@ -101,9 +101,14 @@ class AdminController extends Controller
     {
         $query = Pengaduan::with('tanggapanDetail');
         
-        // Add filter for jenis_pengaduan if it exists in request
+        // Filter by jenis_pengaduan
         if ($request->has('jenis_pengaduan') && $request->jenis_pengaduan != '') {
             $query->where('jenis_pengaduan', $request->jenis_pengaduan);
+        }
+        
+        // Filter by nama
+        if ($request->has('nama') && $request->nama != '') {
+            $query->where('nama', 'like', '%' . $request->nama . '%');
         }
         
         $pengaduan = $query->paginate(10);
