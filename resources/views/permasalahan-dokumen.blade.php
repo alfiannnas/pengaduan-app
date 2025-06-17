@@ -271,6 +271,19 @@
             padding: 10px;
             font-size: 14px;
         }
+        
+        footer .w-4, 
+        footer .h-4 {
+            width: 16px !important;
+            height: 16px !important;
+            vertical-align: middle;
+            margin-right: 6px;
+        }
+        footer .kontak-desa-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 6px;
+        }
     </style>
         @if (file_exists(public_path('build/manifest.json')) || file_exists(public_path('hot')))
             @vite(['resources/css/app.css', 'resources/js/app.js'])
@@ -379,10 +392,10 @@
 
         <div>
             <h3>Kontak Desa</h3>
-            📞 0831-5953-5131<br>
-            📧 desatundagan@gmail.com<br>
-            🕒 07:30 - 16:00 WIB<br>
-            📍 Desa Tundagan, Kecamatan Watukumpul
+            <div class="kontak-desa-item"><x-lucide-phone class="w-4 h-4" /> 0831-5953-5131</div>
+            <div class="kontak-desa-item"><x-lucide-mail class="w-4 h-4" /> desatundagan@gmail.com</div>
+            <div class="kontak-desa-item"><x-lucide-clock class="w-4 h-4" /> 07:30 - 16:00 WIB</div>
+            <div class="kontak-desa-item"><x-lucide-map-pin class="w-4 h-4" /> Desa Tundagan, Kecamatan Watukumpul</div>
         </div>
     </footer>
 
