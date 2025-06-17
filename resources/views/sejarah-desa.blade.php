@@ -205,6 +205,19 @@
             align-items: center;
             margin-bottom: 6px;
         }
+        .user-link {
+            display: flex;
+            align-items: center;
+            gap: 2px;
+            text-decoration: none;
+            color: inherit;
+        }
+
+        .user-icon {
+            width: 20px;
+            height: 20px;
+            margin-rigt: -2px;
+        }
     </style>
         @if (file_exists(public_path('build/manifest.json')) || file_exists(public_path('hot')))
     @vite(['resources/css/app.css', 'resources/js/app.js'])
@@ -247,8 +260,16 @@
                 </div>
             </div>
             <div class="user-info">
-                <a href="{{ Auth::check() ? route('profile') : route('login') }}">{{ Auth::check() ? '👨🏻‍💼 ' . Auth::user()->name : 'Login' }}</a>
-                <a href="{{ Auth::check() ? route('logout') : route('registration') }}">{{ Auth::check() ? 'LOGOUT' : 'Register' }}</a>
+                @if (Auth::check())
+                    <a href="{{ route('profile') }}" class="user-link">
+                        <x-lucide-user class="user-icon" />
+                        <span>{{ Auth::user()->name }}</span>
+                    </a>
+                    <a href="{{ route('logout') }}">LOGOUT</a>
+                @else
+                    <a href="{{ route('login') }}">Login</a>
+                    <a href="{{ route('registration') }}">Register</a>
+                @endif
             </div>
         </nav>
     </header>
