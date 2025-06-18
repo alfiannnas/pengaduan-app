@@ -270,16 +270,16 @@
 
         <div class="kontak-container">
             <div class="kontak-item">
-                📞 0831-5953-5131
+                <x-lucide-phone class="user-icon" /> 0831-5953-5131
             </div>
             <div class="kontak-item">
-                📧 desatundagan@gmail.com
+                <x-lucide-mail class="user-icon" /> desatundagan@gmail.com
             </div>
             <div class="kontak-item">
-                🕒 07:30 - 16:00 WIB
+                <x-lucide-clock class="user-icon" /> 07:30 - 16:00 WIB
             </div>
             <div class="kontak-item">
-                🏡 Desa Tundagan, Kecamatan Watukumpul
+                <x-lucide-map-pin class="user-icon" /> Desa Tundagan, Kecamatan Watukumpul
             </div>
         </div>
     </div>
