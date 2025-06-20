@@ -327,11 +327,11 @@
 
         <form class="form-container" method="post" enctype="multipart/form-data" action="{{ route('store-profile') }}">
             @csrf
-            <div class="profile-photo-wrapper">
+            <!-- <div class="profile-photo-wrapper">
                 <img src="{{ asset('images/profil.png') }}" alt="User Photo">
                 <label for="foto" class="upload-icon">✏️</label>
                 <input type="file" id="foto" name="foto">
-            </div>
+            </div> -->
 
             <div class="form-group">
                 <label for="nama">Nama</label>
