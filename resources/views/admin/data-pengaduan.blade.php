@@ -292,6 +292,7 @@
             min-height: 80px;
         }
     </style>
+    <script src="https://unpkg.com/lucide@latest"></script>
     @if (file_exists(public_path('build/manifest.json')) || file_exists(public_path('hot')))
     @vite(['resources/css/app.css', 'resources/js/app.js'])
     @endif
@@ -305,13 +306,14 @@
             <h2>{{ Auth::user()->name }}</h2>
         </div>
         <hr>
-        <a href="{{ route('admin.dashboard') }}"><span>🏠</span> Dashboard</a>
-        <a href="{{ route('admin.data-tanggapan') }}" class="active"><span>✅</span> Data Tanggapan</a>
-        <a href="{{ route('admin.data-pengaduan') }}"><span>📄</span> Data Pengaduan</a>
-        <a href="{{ route('admin.data-petugas') }}"><span>👮</span> Data Petugas</a>
-        <a href="{{ route('admin.data-masyarakat') }}"><span>👥</span> Data Masyarakat</a>
-        <a href="{{ route('admin.profil-desa') }}"><span>🏡</span> Profil Desa</a>
-        <a href="{{ route('logout') }}" class="logout"><span>🚪</span> Keluar</a>
+        <a href="{{ route('admin.dashboard') }}"><i data-lucide="home"></i> Dashboard</a>
+        <a href="{{ route('admin.data-tanggapan') }}" class="active"><i data-lucide="check-circle"></i> Data Tanggapan</a>
+        <a href="{{ route('admin.data-pengaduan') }}"><i data-lucide="file-text"></i> Data Pengaduan</a>
+        <a href="{{ route('admin.data-petugas') }}"><i data-lucide="users"></i> Data Petugas</a>
+        <a href="{{ route('admin.data-masyarakat') }}"><i data-lucide="users"></i> Data Masyarakat</a>
+        <a href="{{ route('admin.profil-desa') }}"><i data-lucide="home"></i> Profil Desa</a>
+        <a href="{{ route('admin.profil-admin') }}"><i data-lucide="user"></i> Profil Admin</a>
+        <a href="{{ route('logout') }}" class="logout"><i data-lucide="log-out"></i> Keluar</a>
     </div>
 
     <div class="content">
@@ -535,6 +537,7 @@
                 modalTanggapan.style.display = 'none';
             }
         }
+        lucide.createIcons();
     </script>
 
 </body>
