@@ -11,6 +11,7 @@ use Carbon\Carbon;
 use Illuminate\Support\Facades\Hash;
 use Maatwebsite\Excel\Facades\Excel;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
 
 class AdminController extends Controller
 {
@@ -393,5 +394,31 @@ class AdminController extends Controller
         $profilDesa->save();
 
         return redirect()->route('admin.profil-desa')->with('success', 'Profil Desa berhasil diubah');
+    }
+    public function profilAdmin() {
+        return view('admin.profil-admin');
+    }
+    public function updateProfile(Request $request)
+    {
+        $user = Auth::user();
+    
+        $request->validate([
+            'username' => 'required|string|max:255|unique:users,username,' . $user->id,
+            'name' => 'required|string|max:255',
+            'nik' => 'required|string|max:30',
+            'telephone' => 'required|string|max:20',
+            'password' => 'nullable|string|min:6',
+        ]);
+    
+        $user->username = $request->username;
+        $user->name = $request->name;
+        $user->nik = $request->nik;
+        $user->telephone = $request->telephone;
+        if ($request->password) {
+            $user->password = bcrypt($request->password);
+        }
+        $user->save();
+    
+        return back()->with('success', 'Profil berhasil diperbarui!');
     }
 }

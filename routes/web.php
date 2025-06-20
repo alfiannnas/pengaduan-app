@@ -42,6 +42,9 @@ Route::prefix('admin')->middleware('auth')->group(function () {
     Route::post('/profil-desa', [AdminController::class, 'storeProfilDesa'])->name('admin.profil-desa.store');
     Route::post('/profil-desa/update/{id}', [AdminController::class, 'updateProfilDesa'])->name('admin.profil-desa.update');
     Route::get('/profil-desa/edit/{id}', [AdminController::class, 'editProfilDesa'])->name('admin.profil-desa.edit');
+    Route::put('/update-profile', [AdminController::class, 'updateProfile'])->name('admin.update-profile');
+    Route::get('/profil-admin', [AdminController::class, 'profilAdmin'])->name('admin.profil-admin');
+
 });
 
 Route::get('/', [MasyarakatController::class, 'home'])->name('home');
