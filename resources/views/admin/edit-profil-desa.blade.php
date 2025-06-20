@@ -174,7 +174,7 @@
         <a href="{{ route('admin.data-pengaduan') }}"><i data-lucide="file-text"></i> Data Pengaduan</a>
         <a href="{{ route('admin.data-petugas') }}"><i data-lucide="users"></i> Data Petugas</a>
         <a href="{{ route('admin.data-masyarakat') }}"><i data-lucide="users"></i> Data Masyarakat</a>
-        <a href="{{ route('admin.profil-desa') }}"><i data-lucide="user-cog"></i> Profil Desa</a>
+        <a href="{{ route('admin.profil-desa') }}"><i data-lucide="home"></i> Profil Desa</a>
         <a href="{{ route('admin.profil-admin') }}"><i data-lucide="user"></i> Profil Admin</a>
         <a href="{{ route('logout') }}" class="logout"><i data-lucide="log-out"></i> Keluar</a>
     </div>
@@ -189,13 +189,13 @@
                 <div style="margin-bottom: 20px;">
                     <label for="nama" style="display: block; margin-bottom: 8px; font-weight: bold;">Nama Profil</label>
                     <input type="text" id="nama" name="nama" value="{{ $profilDesa->nama ?? '' }}" 
-                        style="width: 100%; padding: 8px; border: 1px solid #ddd; border-radius: 4px;">
+                        style="width: 100%; padding: 8px; padding-right: 0px; border: 1px solid #ddd; border-radius: 4px;" readonly>
                 </div>
 
                 <div style="margin-bottom: 20px;">
                     <label for="deskripsi" style="display: block; margin-bottom: 8px; font-weight: bold;">Deskripsi</label>
                     <textarea id="deskripsi" name="deskripsi" rows="10" 
-                        style="width: 100%; padding: 8px; border: 1px solid #ddd; border-radius: 4px;">{{ $profilDesa->deskripsi ?? '' }}</textarea>
+                        style="width: 100%; padding: 8px; padding-right: 0px; border: 1px solid #ddd; border-radius: 4px;">{{ $profilDesa->deskripsi ?? '' }}</textarea>
                 </div>
 
                 <button type="submit" class="btn btn-ubah" style="padding: 10px 20px; font-size: 14px;">

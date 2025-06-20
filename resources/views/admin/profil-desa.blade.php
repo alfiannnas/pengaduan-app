@@ -181,11 +181,6 @@
                                 <input type="text" name="nama" value="{{ $data['nama'] }}" style="display:none;">
                                 <button type="submit" class="btn btn-ubah">Ubah</button>
                             </form>
-                            <form method="post" action="{{ route('admin.profil-desa.delete', ['id' => $data['id']]) }}" style="display:inline;">
-                                @csrf
-                                @method('DELETE')
-                                <button type="submit" name="hapus" class="btn btn-hapus" onclick="return confirm('Yakin ingin menghapus?')">Hapus</button>
-                            </form>
                         </td>
                     </tr>
                     @endforeach
