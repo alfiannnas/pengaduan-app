@@ -271,6 +271,34 @@
             height: 20px;
             margin-rigt: -2px;
         }
+
+        .alert-message {
+            max-width: 80%;
+            margin: 20px auto 18px auto;
+            box-sizing: border-box;
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            border-radius: 8px;
+            padding: 12px 18px;
+            border: 1.5px solid;
+        }
+        .alert-error {
+            background: #ffe0e0;
+            color: #990000;
+            border-color: #ffb3b3;
+        }
+        .alert-success {
+            background: #e0ffe0;
+            color: #155724;
+            border-color: #b3ffb3;
+        }
+        .alert-message strong {
+            margin-bottom: 6px;
+            text-align: left;
+            display: block;
+        }
     </style>
         @if (file_exists(public_path('build/manifest.json')) || file_exists(public_path('hot')))
     @vite(['resources/css/app.css', 'resources/js/app.js'])
@@ -325,7 +353,19 @@
     <div class="content">
         <div class="title">Edit Profile</div>
 
+
         <form class="form-container" method="post" enctype="multipart/form-data" action="{{ route('store-profile') }}">
+        @if ($errors->any())
+                <div class="alert-message alert-error">
+                    <strong>Terjadi kesalahan:</strong>
+                    <ul style="margin:8px 0 0 18px; padding:0; font-size:14px;">
+                        @foreach ($errors->all() as $error)
+                            <li style="margin-bottom:4px;">{{ $error }}</li>
+                        @endforeach
+                    </ul>
+                </div>
+            @endif
+
             @csrf
             <!-- <div class="profile-photo-wrapper">
                 <img src="{{ asset('images/profil.png') }}" alt="User Photo">

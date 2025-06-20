@@ -346,12 +346,23 @@ class MasyarakatController extends Controller
 
     public function storeProfile(Request $request)
     {
-        $user = User::find(Auth::user()->id);
+        $user = Auth::user();
+
+        $request->validate([
+            'username' => 'required|string|max:255|unique:users,username,' . $user->id,
+            'nama' => 'required|string|max:255',
+            'telepon' => 'required|string|max:20',
+            'password' => 'nullable|string|min:6',
+        ]);
+
         $user->name = $request->nama;
         $user->username = $request->username;
-        $user->password = Hash::make($request->password);
         $user->telephone = $request->telepon;
+        if ($request->password) {
+            $user->password = bcrypt($request->password);
+        }
         $user->save();
+
         return redirect()->route('profile')->with('success', 'Profile berhasil diubah');
     }
     

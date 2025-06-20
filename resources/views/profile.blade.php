@@ -245,6 +245,28 @@
             height: 20px;
             margin-rigt: -2px;
         }
+        .alert-message {
+            max-width: 80%;
+            margin: 20px auto 18px auto;
+            box-sizing: border-box;
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            border-radius: 8px;
+            padding: 12px 18px;
+            border: 1.5px solid;
+        }
+        .alert-success {
+            background: #e0ffe0;
+            color: #155724;
+            border-color: #b3ffb3;
+        }
+        .alert-message strong {
+            margin-bottom: 6px;
+            text-align: left;
+            display: block;
+        }
     </style>
     @if (file_exists(public_path('build/manifest.json')) || file_exists(public_path('hot')))
     @vite(['resources/css/app.css', 'resources/js/app.js'])
@@ -301,7 +323,12 @@
         <div class="title">Profile</div>
 
         <div class="form-container">
-            <img src="image/profil.png" alt="User Icon">
+            <!-- <img src="image/profil.png" alt="User Icon"> -->
+            @if (session('success'))
+                <div class="alert-message alert-success">
+                    <strong>Berhasil:</strong> {{ session('success') }}
+                </div>
+            @endif
 
             <div class="form-group">
                 <label for="nik">NIK</label>
