@@ -250,7 +250,7 @@
         <a href="{{ route('admin.data-pengaduan') }}"><i data-lucide="file-text"></i> Data Pengaduan</a>
         <a href="{{ route('admin.data-petugas') }}"><i data-lucide="users"></i> Data Petugas</a>
         <a href="{{ route('admin.data-masyarakat') }}"><i data-lucide="users"></i> Data Masyarakat</a>
-        <a href="{{ route('admin.profil-desa') }}"><i data-lucide="home"></i> Profil Desa</a>
+        <a href="{{ route('admin.profil-desa') }}"><i data-lucide="user-cog"></i> Profil Desa</a>
         <a href="{{ route('admin.profil-admin') }}"><i data-lucide="user"></i> Profil Admin</a>
         <a href="{{ route('logout') }}" class="logout"><i data-lucide="log-out"></i> Keluar</a>
     </div>
