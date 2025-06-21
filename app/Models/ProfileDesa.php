@@ -12,8 +12,10 @@ class ProfileDesa extends Model
     protected $table = 'profile_desa';
     protected $fillable = [
         'nama',
+        'slug',
         'deskripsi',
-        'level'
+        'level',
+        'foto'
     ];
 
 }

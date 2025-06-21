@@ -371,10 +371,50 @@ class AdminController extends Controller
         return redirect()->route('admin.profil-desa')->with('success', 'Profil Desa berhasil ditambahkan');
     }
 
-    public function editProfilDesa($id)
+    public function editProfilDesa($slug)
     {
-        $profilDesa = ProfileDesa::find($id);
-        return view('admin.edit-profil-desa', compact('profilDesa'));
+        $profilDesa = ProfileDesa::where('slug', $slug)->first();
+
+        if ($profilDesa->slug === 'sejarah'){
+            return view('admin.edit-sejarah', compact('profilDesa'));
+        }
+        if ($profilDesa->slug === 'struktur-organisasi'){
+            return view('admin.edit-struktur', compact('profilDesa'));
+        }
+        if ($profilDesa->slug === 'visi-misi'){
+            $visi = '';
+            $misi = '';
+            if ($profilDesa && $profilDesa->deskripsi) {
+                preg_match('/<h1>Visi<\/h1><p>(.*?)<\/p><h1>Misi<\/h1><p>(.*?)<\/p>/s', $profilDesa->deskripsi, $matches);
+                $visi = isset($matches[1]) ? strip_tags(str_replace('<br />', "\n", $matches[1])) : '';
+                $misi = isset($matches[2]) ? strip_tags(str_replace('<br />', "\n", $matches[2])) : '';
+            }
+            return view('admin.edit-visi-misi', compact('profilDesa', 'visi', 'misi'));
+        }
+        if ($profilDesa->slug === 'kontak') {
+            $telepon = '';
+            $email = '';
+            $jam_kerja = '';
+            $alamat = '';
+        
+            if ($profilDesa && $profilDesa->deskripsi) {
+                preg_match('/<h1>Kontak<\/h1><p>(.*?)<\/p>/s', $profilDesa->deskripsi, $matches);
+                if (isset($matches[1])) {
+                    $kontak = $matches[1];
+                    preg_match('/<b>Telepon:<\/b>\s*([^<]*)<br>/', $kontak, $telMatch);
+                    preg_match('/<b>Email:<\/b>\s*([^<]*)<br>/', $kontak, $emailMatch);
+                    preg_match('/<b>Jam Kerja:<\/b>\s*([^<]*)<br>/', $kontak, $jamMatch);
+                    preg_match('/<b>Alamat:<\/b>\s*(.*)/', $kontak, $alamatMatch);
+        
+                    $telepon = isset($telMatch[1]) ? trim($telMatch[1]) : '';
+                    $email = isset($emailMatch[1]) ? trim($emailMatch[1]) : '';
+                    $jam_kerja = isset($jamMatch[1]) ? trim($jamMatch[1]) : '';
+                    $alamat = isset($alamatMatch[1]) ? trim($alamatMatch[1]) : '';
+                }
+            }
+        
+            return view('admin.edit-kontak', compact('profilDesa', 'telepon', 'email', 'jam_kerja', 'alamat'));
+        }
     }
 
     public function deleteProfilDesa(Request $request)
@@ -385,12 +425,34 @@ class AdminController extends Controller
         return redirect()->route('admin.profil-desa')->with('success', 'Profil Desa berhasil dihapus');
     }
 
-    public function updateProfilDesa(Request $request, $id)
+    public function updateProfilDesa(Request $request, $slug)
     {
-        $profilDesa = ProfileDesa::find($id);
+        $profilDesa = ProfileDesa::where('slug', $slug)->first();
 
-        $profilDesa->nama = $request->nama;
-        $profilDesa->deskripsi = $request->deskripsi;
+        if($request->file('imgupload')){
+            $extension = $request->file('imgupload')->extension();
+            $imgname = date('dmyHis') . '.' . $extension;
+            $request->file('imgupload')->storeAs('images', $imgname);
+        }
+
+        if(!empty($request->nama)){
+            $profilDesa->nama = $request->nama;
+        }
+
+        if($slug === 'visi-misi') {
+            $visi = $request->input('visi', '');
+            $misi = $request->input('misi', '');
+            $profilDesa->deskripsi = "<h1>Visi</h1><p>" . e($visi) . "</p><h1>Misi</h1><p>" . e($misi) . "</p>";
+        } else if($slug === 'kontak') {
+            $telepon = $request->input('telepon', '');
+            $email = $request->input('email', '');
+            $jam_kerja = $request->input('jam_kerja', '');
+            $alamat = $request->input('alamat', '');
+            $profilDesa->deskripsi = "<h1>Kontak</h1><p><b>Telepon:</b> " . e($telepon) . "<br><b>Email:</b> " . e($email) . "<br><b>Jam Kerja:</b> " . e($jam_kerja) . "<br><b>Alamat:</b> " . nl2br(e($alamat)) . "</p>";
+        } else {
+            $profilDesa->deskripsi = $request->deskripsi ?? null;
+        }
+        $profilDesa->foto = $imgname ?? $profilDesa->foto;
         $profilDesa->save();
 
         return redirect()->route('admin.profil-desa')->with('success', 'Profil Desa berhasil diubah');

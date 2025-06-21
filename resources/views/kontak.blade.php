@@ -267,19 +267,18 @@
 
     <div class="content">
         <div class="title">KONTAK</div>
-
         <div class="kontak-container">
             <div class="kontak-item">
-                <x-lucide-phone class="user-icon" /> 0831-5953-5131
+                <x-lucide-phone class="user-icon" /> {{ $telepon }}
             </div>
             <div class="kontak-item">
-                <x-lucide-mail class="user-icon" /> desatundagan@gmail.com
+                <x-lucide-mail class="user-icon" /> {{ $email }}
             </div>
             <div class="kontak-item">
-                <x-lucide-clock class="user-icon" /> 07:30 - 16:00 WIB
+                <x-lucide-clock class="user-icon" /> {{ $jam_kerja }}
             </div>
             <div class="kontak-item">
-                <x-lucide-map-pin class="user-icon" /> Desa Tundagan, Kecamatan Watukumpul
+                <x-lucide-map-pin class="user-icon" /> {{ $alamat }}
             </div>
         </div>
     </div>

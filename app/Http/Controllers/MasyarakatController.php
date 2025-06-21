@@ -307,7 +307,28 @@ class MasyarakatController extends Controller
 
     public function visiMisi()
     {
-        return view('visi-misi');
+        // Ambil data dari database (misal slug = 'visi-misi')
+        $profilDesa = ProfileDesa::where('slug', 'visi-misi')->first();
+
+        // Default jika tidak ada data
+        $visi = '';
+        $misi = '';
+
+        if ($profilDesa && $profilDesa->deskripsi) {
+            // Ambil isi <h1>Visi</h1><p>...</p> (support multiline)
+            preg_match('/<h1>Visi<\/h1><p>(.*?)<\/p>/s', $profilDesa->deskripsi, $visiMatch);
+            // Ambil isi <h1>Misi</h1><p>...</p> (support multiline)
+            preg_match('/<h1>Misi<\/h1><p>(.*?)<\/p>/s', $profilDesa->deskripsi, $misiMatch);
+
+            $visi = $visiMatch[1] ?? '';
+            $misi = $misiMatch[1] ?? '';
+        }
+
+
+        return view('visi-misi', [
+            'visi' => $visi,
+            'misi' => $misi,
+        ]);
     }
 
     public function lokasi()
@@ -317,7 +338,22 @@ class MasyarakatController extends Controller
 
     public function kontak()
     {
-        return view('kontak');
+        $profilDesa = ProfileDesa::where('slug', 'kontak')->first();
+
+        $deskripsi = $profilDesa->deskripsi;
+
+
+        preg_match('/<b>Telepon:<\\/b> (.*?)<br>/', $deskripsi, $telp);
+        preg_match('/<b>Email:<\\/b> (.*?)<br>/', $deskripsi, $email);
+        preg_match('/<b>Jam Kerja:<\\/b> (.*?)<br>/', $deskripsi, $jam);
+        preg_match('/<b>Alamat:<\\/b> (.*?)<\\/p>/', $deskripsi, $alamat);
+
+        return view('kontak', [
+            'telepon' => $telp[1] ?? '',
+            'email' => $email[1] ?? '',
+            'jam_kerja' => $jam[1] ?? '',
+            'alamat' => $alamat[1] ?? '',
+        ]);
     }
 
     public function profile()

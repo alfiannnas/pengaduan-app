@@ -288,19 +288,26 @@
 
         <div class="visi">
             <h2>VISI</h2>
-            <p>Menuju Tundagan yang lebih Baik, Berkembang, Aman, Berjatidiri, Mandiri dan Sejahtera</p>
+            <p>{{ $visi }}</p>
         </div>
 
         <div class="misi">
             <h2>MISI</h2>
-            <ol>
-                <li>Meningkatkan Akses Masyarakat Dalam Pembangunan Desa Berdasarkan Azaz Musyawarah, Mufakat Dan Gotong Royong.</li>
-                <li>Mengembangkan Ekonomi Kerakyatan Sesuai Dengan Potensi Sumber Daya Lokal Untuk Mengurangi Pengangguran.</li>
-                <li>Meningkatkan Kualitas Penyelenggaraan Pemerintahan, Pendidikan Dan Kesehatan Masyarakat.</li>
-                <li>Mewujudkan Kehidupan Masyarakat Yang Aman, Harmonis, Saling Menghormati Serta Meningkatkan Keberdayaan Perempuan.</li>
-                <li>Melestarikan Budaya Desa Sebagai Landasan Jatidiri Sesuai Karakteristik Dan Kepribadian Masyarakat.</li>
-                <li>Meningkatkan Dan Mewujudkan Sarana Prasarana Organisasi Kepemudaan Dan Keagamaan Desa Tundagan.</li>
-            </ol>
+            @php
+                $misi_items = preg_split('/\r?\n/', $misi);
+                $is_list = count($misi_items) > 1;
+            @endphp
+            @if($is_list)
+                <ol style="list-style: none; padding-left: 0;">
+                    @foreach($misi_items as $item)
+                        @if(trim($item) !== '')
+                            <li>{{ $item }}</li>
+                        @endif
+                    @endforeach
+                </ol>
+            @else
+                <p>{{ $misi }}</p>
+            @endif
         </div>
     </div>
 
