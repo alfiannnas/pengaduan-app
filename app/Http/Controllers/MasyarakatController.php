@@ -302,7 +302,11 @@ class MasyarakatController extends Controller
 
     public function strukturOrganisasi()
     {
-        return view('struktur-organisasi');
+        $strukturOrganisasi = ProfileDesa::where('slug', 'struktur-organisasi')->first();
+
+        return view('struktur-organisasi', [
+            'foto' => $strukturOrganisasi->foto ?? null
+        ]);
     }
 
     public function visiMisi()

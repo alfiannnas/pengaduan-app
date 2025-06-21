@@ -258,8 +258,12 @@
         <h2>STRUKTUR ORGANISASI</h2>
         <h3>Struktur Organisasi Desa Tundagan</h3>
 
-        <div class="struktur-img">
-            <img src="{{ asset('images/struktur.png') }}" alt="Struktur Organisasi Desa">
+        <div class="struktur-img" style="text-align:center;">
+            @if ($foto)
+                <img src="{{ asset('storage/images/' . $foto) }}" class="foto" alt="Struktur Organisasi Desa">
+            @else
+                <span>Tidak ada Foto</span>
+            @endif
         </div>
     </div>
 
